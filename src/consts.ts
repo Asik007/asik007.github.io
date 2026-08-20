@@ -12,3 +12,5 @@ export const NAV_LINKS = [
 
 export const LINKED_IN_URL = 'https://www.linkedin.com/in/asik007/';
 export const GITHUB_PROFILE_URL = 'https://github.com/asik007';
+
+export const CV_PDF_PATH = '/cv/Asik_Mahmud_CV.pdf';

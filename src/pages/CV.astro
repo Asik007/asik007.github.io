@@ -1,75 +1,87 @@
 ---
-import { GITHUB_PROFILE_URL, LINKED_IN_URL, SITE_TITLE, NAV_LINKS } from '../consts';
-import HeaderLink from './HeaderLink.astro';
-import ThemeToggle from './ThemeToggle.astro';
+import CVEntry from '../components/cv/CVEntry.astro';
+import CVSection from '../components/cv/CVSection.astro';
+import { Image } from 'astro:assets';
+import pdfIcon from '../assets/pdf.svg'; 
+import { CV_PDF_PATH } from '../consts';
+// import { site } from '../config/site';
+import Page from '../layouts/Basic.astro';
+// import { withBase } from '../utils/base';
+// import type { JSONResume, RenderCV, RenderCVEntry } from '../utils/cv';
+import { formatCVDate, formatDateRange } from '../utils/cv';
+
+
+
+
+import {getCollection} from 'astro:content';
+// Get the single CV entry
+const cvEntries = await getCollection('cv');
+const cvEntry = cvEntries[0]; // Get the first (and only) entry
+
+// Access the data
+// const { sections } = cvEntry;
+
+// import resumeData from '../content/cv/resume.json';
+// import { getCollection } from 'astro:content';
+
+// const format = site.cv.format;
+const format = 'rendercv'; // or 'jsonresume' depending on your data
+
+// const renderCV = format === 'rendercv' ? () : null;
+// const jsonResume = format === 'jsonresume' ? (resumeData as JSONResume) : null;
+
+const rc = cvEntry.data ?? null;
+const education = rc?.sections?.education ?? [];
+const experience = rc?.sections?.experience ?? [];
+const rcPublications = rc?.sections?.publications ?? [];
+const awards = rc?.sections?.awards ?? [];
+const skills = rc?.sections?.skills ?? []
+const interests = rc?.sections?.interests ?? [];
+
+console.log('CV Entry:', rc);
+// console.log('Education:', education);
+// console.log('Experience:', experience);
+// console.log('Publications:', rcPublications);
+// console.log('Awards:', awards);
+// console.log('Skills:', skills);
+// console.log('Interests:', interests);
+
+// Build sidebar TOC items based on which sections have data
+type TocItem = { label: string; href: string };
+
+const tocItems: TocItem[] = [];
+if (format === 'rendercv' && rc) {
+  if (rc.name || rc.email || rc.phone) tocItems.push({ label: 'Contact Information', href: '#contact' });
+  if (rc.summary) tocItems.push({ label: 'Professional Summary', href: '#summary' });
+  if (education.length > 0) tocItems.push({ label: 'Education', href: '#education' });
+  if (experience.length > 0) tocItems.push({ label: 'Experience', href: '#experience' });
+  if (rcPublications.length > 0) tocItems.push({ label: 'Publications', href: '#publications' });
+  if (awards.length > 0) tocItems.push({ label: 'Awards', href: '#awards' });
+  if (skills.length > 0) tocItems.push({ label: 'Skills', href: '#skills' });
+  if (interests.length > 0) tocItems.push({ label: 'Interests', href: '#interests' });
+}
+
+console.log('TOC Items:', tocItems);
 ---
 
-<header class="px-4 shadow-md" style="background-color: var(--color-primary); color: var(--color-secondary);">
-    <nav class="flex items-baseline justify-between">
+<Page title="CV" description={`Curriculum vitae of ${rc.name ?? 'the author'}`}>
+  <div class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        {rc.name ?? 'Curriculum Vitae'}
+        
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            class="float-right"
+            aria-label="Download CV PDF"
+          >
+            <Image src={pdfIcon} alt="PDF Icon" width="24" height="24"/>
+          </a>
+      </h1>
+    </header>
 
     
-		<a href="/" class="no-underline">
-			<img src="/monkey_scratch.svg" alt="Logo" class="inline-block w-8 h-8 mr-2 align-middle" />
-		</a>
-		
-		<!-- <a href=/ >
-			<span class="sr-only">Linked-in Profile</span>
-			<svg viewBox="9 9 53 52" xml:space="preserve" aria-hidden="true" width="32" height="31">
-				<path 
-				xmlns="http://www.w3.org/2000/svg"
-				fill="currentColor" 
-				d="M62,62 L51.315625,62 L51.315625,43.8021149 C51.315625,38.8127542 49.4197917,36.0245323 45.4707031,36.0245323 C41.1746094,36.0245323 38.9300781,38.9261103 38.9300781,43.8021149 L38.9300781,62 L28.6333333,62 L28.6333333,27.3333333 L38.9300781,27.3333333 L38.9300781,32.0029283 C38.9300781,32.0029283 42.0260417,26.2742151 49.3825521,26.2742151 C56.7356771,26.2742151 62,30.7644705 62,40.051212 L62,62 Z M16.349349,22.7940133 C12.8420573,22.7940133 10,19.9296567 10,16.3970067 C10,12.8643566 12.8420573,10 16.349349,10 C19.8566406,10 22.6970052,12.8643566 22.6970052,16.3970067 C22.6970052,19.9296567 19.8566406,22.7940133 16.349349,22.7940133 Z M11.0325521,62 L21.769401,62 L21.769401,27.3333333 L11.0325521,27.3333333 L11.0325521,62 Z"
-				/>
-			</svg>
-		</a> -->
-        
-		<div class="flex items-center gap-3" justify-between>
-
-			
-
-			<!-- Navigation Links -->
-			<div class="flex justify-baseline gap-2">
-				{NAV_LINKS.map((link) => (
-					<HeaderLink href={link.href}>{link.title}</HeaderLink>
-				))}
-			</div>
-
-			<!-- Dark and Light Mode Toggle -->
-			<ThemeToggle />
-
-
-
-			<!-- Social Media Links -->
-			 
-			<!-- <div class="flex justify-center gap-2">
-				<a href={LINKED_IN_URL} target="_blank" class="text-black hover:opacity-70 transition-opacity">
-					<span class="sr-only">Linked-in Profile</span>
-					<svg viewBox="9 9 53 52" xml:space="preserve" aria-hidden="true" width="32" height="31">
-						<path 
-						xmlns="http://www.w3.org/2000/svg"
-						fill="currentColor" 
-						d="M62,62 L51.315625,62 L51.315625,43.8021149 C51.315625,38.8127542 49.4197917,36.0245323 45.4707031,36.0245323 C41.1746094,36.0245323 38.9300781,38.9261103 38.9300781,43.8021149 L38.9300781,62 L28.6333333,62 L28.6333333,27.3333333 L38.9300781,27.3333333 L38.9300781,32.0029283 C38.9300781,32.0029283 42.0260417,26.2742151 49.3825521,26.2742151 C56.7356771,26.2742151 62,30.7644705 62,40.051212 L62,62 Z M16.349349,22.7940133 C12.8420573,22.7940133 10,19.9296567 10,16.3970067 C10,12.8643566 12.8420573,10 16.349349,10 C19.8566406,10 22.6970052,12.8643566 22.6970052,16.3970067 C22.6970052,19.9296567 19.8566406,22.7940133 16.349349,22.7940133 Z M11.0325521,62 L21.769401,62 L21.769401,27.3333333 L11.0325521,27.3333333 L11.0325521,62 Z"
-						/>
-					</svg>
-				</a>
-				<a href={GITHUB_PROFILE_URL} target="_blank" class="text-black hover:opacity-70 transition-opacity">
-					<span class="sr-only">Github</span>
-					<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32">
-						<path
-							fill="currentColor"
-							d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-						></path>
-					</svg>
-				</a>
-
-			</div>
-			 -->
-
-
-		</div>
-    </nav>
-</header>
-
     <article>
       <div class="cv-page-wrapper">
         <!-- Sidebar TOC -->
@@ -89,7 +101,6 @@ import ThemeToggle from './ThemeToggle.astro';
         <div class="cv">
 
           <!-- ── RENDERCV ──────────────────────────────────────────────── -->
-          {format === 'rendercv' && renderCV && (
             <>
               {rc && (rc.name || rc.email || rc.phone || rc.website || rc.location) && (
                 <>
@@ -230,13 +241,72 @@ import ThemeToggle from './ThemeToggle.astro';
                 </CVSection>
               )}
             </>
-          )}
 
 
         </div><!-- /.cv -->
+
+        <div class="clear">
+          sticky pdf button
+        </div>
+
       </div><!-- /.cv-page-wrapper -->
     </article>
 
-<script>
+  </div>
+</Page>
 
-</script>
+<style>
+  /* Two-column layout: sidebar + content */
+  .cv-page-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  /* Sticky left sidebar TOC */
+  .cv-sidebar-toc {
+    flex-shrink: 0;
+    width: 180px;
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+
+  .cv-sidebar-toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-left: 2px solid var(--global-divider-color);
+  }
+
+  .cv-sidebar-toc li a {
+    display: block;
+    padding: 0.3rem 0 0.3rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--global-text-color-light);
+    text-decoration: none;
+    transition: color 0.15s ease;
+    line-height: 1.3;
+  }
+
+  .cv-sidebar-toc li a:hover {
+    color: var(--global-theme-color);
+  }
+
+  /* Main CV content fills remaining space */
+  .cv {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Hide sidebar on small screens */
+  @media (max-width: 768px) {
+    .cv-page-wrapper {
+      flex-direction: column;
+    }
+    .cv-sidebar-toc {
+      display: none;
+    }
+  }
+</style>
