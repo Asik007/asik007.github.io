@@ -65,45 +65,44 @@ console.log('TOC Items:', tocItems);
 ---
 <Page title="CV" description={`Curriculum vitae of ${rc.name ?? 'the author'}`}>
   <div class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        {rc.name ?? 'Curriculum Vitae'}
-        <!-- <a
-          target="_blank"
-          rel="noopener noreferrer"
-          class="float-right"
-          aria-label="Download CV PDF"
-        >
-          <Image src={pdfIcon} alt="PDF Icon" width={24} height={24} />
-        </a> -->
-      </h1>
-    </header>
+    <!-- Header -->
 
-   <article>
-      <div class="flex flex-col md:flex-row gap-8 items-start">
+
+    <!-- Body -->
+   <article >
+    <!-- Table of Contents -->
+      <div class="flex flex-col md:flex-row gap-8 items-start ">
         {tocItems.length > 0 && (
-
           <nav
-            class="hidden md:block flex-shrink-0 w-44 sticky top-20 max-h-[calc(100vh-100px)] overflow-y-auto"
+            class="hidden md:block shrink-0 w-44 sticky top-20 max-h-[calc(100vh-100px)] overflow-y-auto"
+            style="color: var(--color-text);  border-radius: 0.5rem; border-color: var(--color-border); border-width: 3px; "
             aria-label="CV sections"
           >
-            <ul class="list-none p-0 m-0 border-l-2 border-gray-200">
+            <ul class="list-none p-0 m-0">
               {tocItems.map((item) => (
-                <li key={item.href}>
+                // <li key={item.href}>
                   <a
                     href={item.href}
-                    class="block py-1 pl-3 text-sm text-gray-600 no-underline transition-colors duration-150 ease-in hover:text-blue-600"
+                    class="block py-1 pl-3 text-sm no-underline transition-ease-in-out font-mono; 
+                    hover:border-b-2 hover:border-color: var(--color-border)  hover:scale-105"
+                    style="color: var(--color-text); background-color: var(--color-primary);"
                   >
                     {item.label}
                   </a>
-                </li>
+                // </li>
               ))}
             </ul>
           </nav>
         )}
 
         <!-- Main CV content – fills remaining space -->
-        <div class="flex-1 min-w-0">
+        <div class="flex-1 min-w-0 shadow-lg" style="background-color: var(--color-primary); color: var(--color-text);">
+          
+              <header class="post-header">
+                <h1 class="post-title text-center">
+                  {rc.name ?? 'Curriculum Vitae'}
+                </h1>
+              </header>
           <!-- ── RENDERCV ──────────────────────────────────────────────── -->
           <>
             {rc && (rc.name || rc.email || rc.phone || rc.website || rc.location) && (
@@ -256,11 +255,21 @@ console.log('TOC Items:', tocItems);
             )}
           </>
         </div>
-
-        <div class="clear">
-          sticky pdf button
-        </div>
       </div>
+
+      <!-- Floating button: placed here, outside the wrapper -->
+      <a
+        href={CV_PDF_PATH}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 px-4 py-3 rounded-full shadow-lg transition-shadow ease-in-out hover:ring-2 hover:ring-(--color-border)" 
+        style="background-color: var(--color-primary); color: var(--color-secondary); focus:ring-color: var(--color-border);"
+        aria-label="Download CV PDF"
+      >
+        <Image src={pdfIcon} alt="" width={20} height={20} />
+        <span class="text-sm font-medium hidden sm:inline">Download PDF</span>
+      </a>
+
     </article>
   </div>
 </Page>

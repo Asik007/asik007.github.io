@@ -11,18 +11,21 @@
 :root {
   color-scheme: light dark;
 
-	--color-jet: #0E2B3A;
+	/* --color-jet: #0E2B3A;
 	--color-cream: #EECC94;
 	--color-chestnut: #9D3723;
 	--color-cerulean: #287C8F;
-	--color-spruce: #374329;
+	--color-spruce: #374329; */
 
-	--color-jet: #001f24;
+	--color-jet-black: #001f24;
 	--color-cream-light: #fae0c1;
 	--color-cream: #ffdcb2;
 	--color-chestnut: #9D3723;
 	--color-cerulean: #287C8F;
 	--color-spruce: #2e3526;
+	--color-evergreen: #00210D;
+	--color-teal: #8ba492;
+	--color-brown: #3d000a
 
 
   /* Semantic Tokens - light mode (default) */
@@ -33,18 +36,21 @@
   --color-text-subtle: var(--color-jet);
   --color-accent: var(--color-spruce);
   --color-border: var(--color-chestnut);
+
 }
 
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-primary: var(--palette-cream-600);
-    --color-secondary: var(--palette-jet-100);
-    --color-background: var(--palette-jet-950);
-    --color-text: var(--palette-jet-100);
+	/* main background color */
+    --color-primary: var(--color-jet-black);
+	/* secondary accent color  */
+    --color-secondary: var(--color-cream);
+    --color-background: var(--color-brown);
+    --color-text: var(--color-cream);
     --color-text-subtle: var(--palette-jet-400);
     --color-accent: var(--palette-chestnut-400);
-    --color-border: var(--palette-jet-800);
+    --color-border: var(--color-chestnut);
   }
 }
 
@@ -67,16 +73,16 @@ body {
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
+	background: var(--color-primary);
 	background-size: 100% 600px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
+	color: var(--color-text);
 	font-size: 20px;
 	line-height: 1.7;
 }
 main {
-	width: 720px;
+	width: 66%;
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
