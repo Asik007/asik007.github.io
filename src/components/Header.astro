@@ -1,29 +1,31 @@
 ---
 import { GITHUB_PROFILE_URL, LINKED_IN_URL, SITE_TITLE, NAV_LINKS } from '../consts';
 import HeaderLink from './HeaderLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
 ---
 
 <header class="px-4 shadow-md" style="background-color: var(--color-primary); color: var(--color-secondary);">
-    <nav class="flex items-center justify-between">
+    <nav class="flex items-baseline justify-between">
 
-
-        <h2 class="m-0 text-base">
-            <a href="/" class="no-underline">
-                {SITE_TITLE}
-            </a>
-        </h2>
+    
+		<a href="/" class="no-underline">
+			<img src="/monkey_scratch.svg" alt="Logo" class="inline-block w-8 h-8 mr-2 align-middle" />
+		</a>
+		
+		<!-- <a href=/ >
+			<span class="sr-only">Linked-in Profile</span>
+			<svg viewBox="9 9 53 52" xml:space="preserve" aria-hidden="true" width="32" height="31">
+				<path 
+				xmlns="http://www.w3.org/2000/svg"
+				fill="currentColor" 
+				d="M62,62 L51.315625,62 L51.315625,43.8021149 C51.315625,38.8127542 49.4197917,36.0245323 45.4707031,36.0245323 C41.1746094,36.0245323 38.9300781,38.9261103 38.9300781,43.8021149 L38.9300781,62 L28.6333333,62 L28.6333333,27.3333333 L38.9300781,27.3333333 L38.9300781,32.0029283 C38.9300781,32.0029283 42.0260417,26.2742151 49.3825521,26.2742151 C56.7356771,26.2742151 62,30.7644705 62,40.051212 L62,62 Z M16.349349,22.7940133 C12.8420573,22.7940133 10,19.9296567 10,16.3970067 C10,12.8643566 12.8420573,10 16.349349,10 C19.8566406,10 22.6970052,12.8643566 22.6970052,16.3970067 C22.6970052,19.9296567 19.8566406,22.7940133 16.349349,22.7940133 Z M11.0325521,62 L21.769401,62 L21.769401,27.3333333 L11.0325521,27.3333333 L11.0325521,62 Z"
+				/>
+			</svg>
+		</a> -->
         
 		<div class="flex items-center gap-3" justify-between>
 
-			<!-- Dark and Light Mode Toggle -->
-			<div class="flex items-center">
-				<button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200">
-					<span class="sr-only">Toggle theme</span>
-					<svg id="theme-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-					</svg>
-				</button>
-			</div>
+			
 
 			<!-- Navigation Links -->
 			<div class="flex justify-baseline gap-2">
@@ -32,10 +34,14 @@ import HeaderLink from './HeaderLink.astro';
 				))}
 			</div>
 
+			<!-- Dark and Light Mode Toggle -->
+			<ThemeToggle />
+
 
 
 			<!-- Social Media Links -->
-			<div class="flex justify-center gap-2">
+			 
+			<!-- <div class="flex justify-center gap-2">
 				<a href={LINKED_IN_URL} target="_blank" class="text-black hover:opacity-70 transition-opacity">
 					<span class="sr-only">Linked-in Profile</span>
 					<svg viewBox="9 9 53 52" xml:space="preserve" aria-hidden="true" width="32" height="31">
@@ -57,9 +63,13 @@ import HeaderLink from './HeaderLink.astro';
 				</a>
 
 			</div>
-			
+			 -->
 
 
 		</div>
     </nav>
 </header>
+
+<script>
+
+</script>
