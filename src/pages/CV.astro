@@ -63,250 +63,204 @@ if (format === 'rendercv' && rc) {
 
 console.log('TOC Items:', tocItems);
 ---
-
 <Page title="CV" description={`Curriculum vitae of ${rc.name ?? 'the author'}`}>
   <div class="post">
     <header class="post-header">
       <h1 class="post-title">
         {rc.name ?? 'Curriculum Vitae'}
-        
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            class="float-right"
-            aria-label="Download CV PDF"
-          >
-            <Image src={pdfIcon} alt="PDF Icon" width="24" height="24"/>
-          </a>
+        <!-- <a
+          target="_blank"
+          rel="noopener noreferrer"
+          class="float-right"
+          aria-label="Download CV PDF"
+        >
+          <Image src={pdfIcon} alt="PDF Icon" width={24} height={24} />
+        </a> -->
       </h1>
     </header>
 
-    
-    <article>
-      <div class="cv-page-wrapper">
-        <!-- Sidebar TOC -->
+   <article>
+      <div class="flex flex-col md:flex-row gap-8 items-start">
         {tocItems.length > 0 && (
-          <nav class="cv-sidebar-toc" aria-label="CV sections">
-            <ul>
+
+          <nav
+            class="hidden md:block flex-shrink-0 w-44 sticky top-20 max-h-[calc(100vh-100px)] overflow-y-auto"
+            aria-label="CV sections"
+          >
+            <ul class="list-none p-0 m-0 border-l-2 border-gray-200">
               {tocItems.map((item) => (
-                <li>
-                  <a href={item.href}>{item.label}</a>
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    class="block py-1 pl-3 text-sm text-gray-600 no-underline transition-colors duration-150 ease-in hover:text-blue-600"
+                  >
+                    {item.label}
+                  </a>
                 </li>
               ))}
             </ul>
           </nav>
         )}
 
-        <!-- CV content -->
-        <div class="cv">
-
+        <!-- Main CV content – fills remaining space -->
+        <div class="flex-1 min-w-0">
           <!-- ── RENDERCV ──────────────────────────────────────────────── -->
-            <>
-              {rc && (rc.name || rc.email || rc.phone || rc.website || rc.location) && (
-                <>
-                  <a class="anchor" id="contact"></a>
-                  <div class="card mt-3 p-3">
-                    <h3 class="card-title font-weight-medium">Contact Information</h3>
-                    <table class="table table-cv table-sm table-borderless">
-                      {rc.name && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Name</b></td>
-                          <td class="p-1 pl-2 font-weight-light">{rc.name}</td>
-                        </tr>
-                      )}
-                      {rc.email && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Email</b></td>
-                          <td class="p-1 pl-2 font-weight-light">{rc.email}</td>
-                        </tr>
-                      )}
-                      {rc.phone && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Phone</b></td>
-                          <td class="p-1 pl-2 font-weight-light">{rc.phone}</td>
-                        </tr>
-                      )}
-                      {rc.location && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Location</b></td>
-                          <td class="p-1 pl-2 font-weight-light">{rc.location}</td>
-                        </tr>
-                      )}
-                      {rc.website && (
-                        <tr>
-                          <td class="p-1 pr-2 font-weight-bold"><b>Website</b></td>
-                          <td class="p-1 pl-2 font-weight-light">
-                            <a href={rc.website} target="_blank" rel="noopener noreferrer">{rc.website}</a>
-                          </td>
-                        </tr>
-                      )}
-                    </table>
-                  </div>
-                </>
-              )}
+          <>
+            {rc && (rc.name || rc.email || rc.phone || rc.website || rc.location) && (
+              <>
+                <a class="anchor" id="contact" />
+                <div class="card mt-3 p-3">
+                  <h3 class="card-title font-weight-medium">Contact Information</h3>
+                  <table class="table table-cv table-sm table-borderless">
+                    {rc.name && (
+                      <tr>
+                        <td class="p-1 pr-2 font-bold">Name</td>
+                        <td class="p-1 pl-2 font-light">{rc.name}</td>
+                      </tr>
+                    )}
+                    {rc.email && (
+                      <tr>
+                        <td class="p-1 pr-2 font-bold">Email</td>
+                        <td class="p-1 pl-2 font-light">{rc.email}</td>
+                      </tr>
+                    )}
+                    {rc.phone && (
+                      <tr>
+                        <td class="p-1 pr-2 font-bold">Phone</td>
+                        <td class="p-1 pl-2 font-light">{rc.phone}</td>
+                      </tr>
+                    )}
+                    {rc.location && (
+                      <tr>
+                        <td class="p-1 pr-2 font-bold">Location</td>
+                        <td class="p-1 pl-2 font-light">{rc.location}</td>
+                      </tr>
+                    )}
+                    {rc.website && (
+                      <tr>
+                        <td class="p-1 pr-2 font-bold">Website</td>
+                        <td class="p-1 pl-2 font-light">
+                          <a
+                            href={rc.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {rc.website}
+                          </a>
+                        </td>
+                      </tr>
+                    )}
+                  </table>
+                </div>
+              </>
+            )}
 
-                {rc?.summary && (
-                <>
-                  <a class="anchor" id="summary"></a>
-                  <div class="card mt-3 p-3">
-                    <h3 class="card-title font-weight-medium">Professional Summary</h3>
-                    <p class="card-text font-weight-light">{rc.summary}</p>
-                  </div>
-                </>
-              )}
+            {rc?.summary && (
+              <>
+                <a class="anchor" id="summary" />
+                <div class="card mt-3 p-3">
+                  <h3 class="card-title font-weight-medium">Professional Summary</h3>
+                  <p class="card-text font-light">{rc.summary}</p>
+                </div>
+              </>
+            )}
 
             {education.length > 0 && (
-                <CVSection title="Education" id="education">
-                  <ul class="card-text font-weight-light list-group list-group-flush">
-                    {education.map((e) => (
-                      <CVEntry
-                        title={[e.degree, e.area].filter(Boolean).join(' in ')}
-                        subtitle={e.institution}
-                        location={e.location}
-                        dates={formatDateRange(e.start_date, e.end_date)}
-                        highlights={e.highlights}
-                      />
-                    ))}
-                  </ul>
-                </CVSection>
-              )}
+              <CVSection title="Education" id="education">
+                <ul class="card-text font-light list-group list-group-flush">
+                  {education.map((e) => (
+                    <CVEntry
+                      key={e.id}
+                      title={[e.degree, e.area].filter(Boolean).join(' in ')}
+                      subtitle={e.institution}
+                      location={e.location}
+                      dates={formatDateRange(e.start_date, e.end_date)}
+                      highlights={e.highlights}
+                    />
+                  ))}
+                </ul>
+              </CVSection>
+            )}
 
-              {experience.length > 0 && (
-                <CVSection title="Experience" id="experience">
-                  <ul class="card-text font-weight-light list-group list-group-flush">
-                    {experience.map((e) => (
-                      <CVEntry
-                        title={e.position ?? ''}
-                        subtitle={e.company}
-                        location={e.location}
-                        dates={formatDateRange(e.start_date, e.end_date)}
-                        highlights={e.highlights}
-                      />
-                    ))}
-                  </ul>
-                </CVSection>
-              )}
+            {experience.length > 0 && (
+              <CVSection title="Experience" id="experience">
+                <ul class="card-text font-light list-group list-group-flush">
+                  {experience.map((e) => (
+                    <CVEntry
+                      key={e.id}
+                      title={e.position ?? ''}
+                      subtitle={e.company}
+                      location={e.location}
+                      dates={formatDateRange(e.start_date, e.end_date)}
+                      highlights={e.highlights}
+                    />
+                  ))}
+                </ul>
+              </CVSection>
+            )}
 
-              {rcPublications.length > 0 && (
-                <CVSection title="Selected Publications" id="publications">
-                  <ul class="card-text font-weight-light list-group list-group-flush">
-                    {rcPublications.map((e) => (
-                      <CVEntry
-                        title={e.title ?? ''}
-                        subtitle={[e.authors?.join(', '), e.journal].filter(Boolean).join(' — ')}
-                        dates={formatCVDate(e.date)}
-                        url={e.doi ? `https://doi.org/${e.doi}` : e.url}
-                      />
-                    ))}
-                  </ul>
-                </CVSection>
-              )}
+            {rcPublications.length > 0 && (
+              <CVSection title="Selected Publications" id="publications">
+                <ul class="card-text font-light list-group list-group-flush">
+                  {rcPublications.map((e) => (
+                    <CVEntry
+                      key={e.id}
+                      title={e.title ?? ''}
+                      subtitle={[e.authors?.join(', '), e.journal].filter(Boolean).join(' — ')}
+                      dates={formatCVDate(e.date)}
+                      url={e.doi ? `https://doi.org/${e.doi}` : e.url}
+                    />
+                  ))}
+                </ul>
+              </CVSection>
+            )}
 
-              {awards.length > 0 && (
-                <CVSection title="Honors &amp; Awards" id="awards">
-                  <ul class="card-text font-weight-light list-group list-group-flush">
-                    {awards.map((e) => (
-                      <CVEntry
-                        title={e.name ?? ''}
-                        subtitle={e.issuer}
-                        dates={formatCVDate(e.date)}
-                        highlights={e.highlights}
-                      />
-                    ))}
-                  </ul>
-                </CVSection>
-              )}
+            {awards.length > 0 && (
+              <CVSection title="Honors &amp; Awards" id="awards">
+                <ul class="card-text font-light list-group list-group-flush">
+                  {awards.map((e) => (
+                    <CVEntry
+                      key={e.id}
+                      title={e.name ?? ''}
+                      subtitle={e.issuer}
+                      dates={formatCVDate(e.date)}
+                      highlights={e.highlights}
+                    />
+                  ))}
+                </ul>
+              </CVSection>
+            )}
 
-              {skills.length > 0 && (
-                <CVSection title="Skills" id="skills">
-                  <div class="card-text font-weight-light">
-                    {skills.map((e) => (
-                      <div class="skill-item">
-                        <strong>{e.label}:</strong>{' '}{e.details}
-                      </div>
-                    ))}
-                  </div>
-                </CVSection>
-              )}
+            {skills.length > 0 && (
+              <CVSection title="Skills" id="skills">
+                <div class="card-text font-light">
+                  {skills.map((e) => (
+                    <div class="skill-item" key={e.id}>
+                      <strong>{e.label}:</strong> {e.details}
+                    </div>
+                  ))}
+                </div>
+              </CVSection>
+            )}
 
-              {interests.length > 0 && (
-                <CVSection title="Interests" id="interests">
-                  <div class="card-text font-weight-light">
-                    {interests.map((e) => (
-                      <div class="skill-item">
-                        <strong>{e.label}:</strong>{' '}{e.details}
-                      </div>
-                    ))}
-                  </div>
-                </CVSection>
-              )}
-            </>
-
-
-        </div><!-- /.cv -->
+            {interests.length > 0 && (
+              <CVSection title="Interests" id="interests">
+                <div class="card-text font-light">
+                  {interests.map((e) => (
+                    <div class="skill-item" key={e.id}>
+                      <strong>{e.label}:</strong> {e.details}
+                    </div>
+                  ))}
+                </div>
+              </CVSection>
+            )}
+          </>
+        </div>
 
         <div class="clear">
           sticky pdf button
         </div>
-
-      </div><!-- /.cv-page-wrapper -->
+      </div>
     </article>
-
   </div>
 </Page>
-
-<style>
-  /* Two-column layout: sidebar + content */
-  .cv-page-wrapper {
-    display: flex;
-    gap: 2rem;
-    align-items: flex-start;
-  }
-
-  /* Sticky left sidebar TOC */
-  .cv-sidebar-toc {
-    flex-shrink: 0;
-    width: 180px;
-    position: sticky;
-    top: 80px;
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
-  }
-
-  .cv-sidebar-toc ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    border-left: 2px solid var(--global-divider-color);
-  }
-
-  .cv-sidebar-toc li a {
-    display: block;
-    padding: 0.3rem 0 0.3rem 0.75rem;
-    font-size: 0.8rem;
-    color: var(--global-text-color-light);
-    text-decoration: none;
-    transition: color 0.15s ease;
-    line-height: 1.3;
-  }
-
-  .cv-sidebar-toc li a:hover {
-    color: var(--global-theme-color);
-  }
-
-  /* Main CV content fills remaining space */
-  .cv {
-    flex: 1;
-    min-width: 0;
-  }
-
-  /* Hide sidebar on small screens */
-  @media (max-width: 768px) {
-    .cv-page-wrapper {
-      flex-direction: column;
-    }
-    .cv-sidebar-toc {
-      display: none;
-    }
-  }
-</style>
