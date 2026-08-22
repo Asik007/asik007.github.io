@@ -86,7 +86,7 @@ main {
 	width: 66%;
 	max-width: calc(100% - 2em);
 	margin: auto;
-	padding: 3em 1em;
+	padding: 0em 1em;
 }
 h1,
 h2,
@@ -150,12 +150,7 @@ code {
 	border-radius: 2px;
 }
 
-.divider {
-	border: 0; 
-	border-top: 3px solid var(--color-border); 
-	margin: 0 auto; 
-	width: 50%;
-}
+
 
 pre {
 	padding: 1.5em;
@@ -200,3 +195,24 @@ hr {
 	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }
+
+
+.divider {
+	border: 0; 
+	border-top: 3px solid var(--color-border); 
+	margin: 0 auto; 
+	width: 50%;
+}
+
+.cv-content {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+.cv-card {
+  border-color: var(--color-secondary);
+  @apply mt-3 p-3 border rounded shadow-sm;
+
+  /* Keep border, rounded, shadow from Tailwind */
+}
+

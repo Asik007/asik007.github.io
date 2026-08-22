@@ -2,14 +2,16 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import TableContent from '../components/TableContent.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 export interface Props {
   bg_color?: string;
   fg_color?: string;
+  tocItems?: { label: string; href: string }[]; // Optional prop for TOC items
 }
 
-const { bg_color, fg_color } = Astro.props;
+const { bg_color, fg_color, tocItems } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,9 +21,69 @@ const { bg_color, fg_color } = Astro.props;
     </head>
     <body style={`background-color: ${bg_color || 'var(--color-primary)'};`}>
         <Header />
-        <main style={`color: ${fg_color || 'var(--color-secondary)'};`}>
-            <slot />
-        </main>
+
+        <div class="page-wrapper">
+            <!-- Left Column: Table of Contents (sized to its own content) -->
+            <aside class="toc-sidebar">
+                {tocItems && tocItems.length > 0 && <TableContent items={tocItems} />}
+            </aside>
+
+            <!-- Middle Column: fills remaining space -->
+            <main class="main-content" style={`color: ${fg_color || 'var(--color-secondary)'};`}>
+                <slot />
+            </main>
+
+            <!-- Right Column: duplicate TOC, invisible but still occupies space,
+                 forcing the right column to match the left column's width -->
+            {tocItems && tocItems.length > 0 && (
+                <div class="toc-balancer" aria-hidden="true">
+                    <TableContent items={tocItems} />
+                </div>
+            )}
+        </div>
+
         <Footer />
     </body>
 </html>
+
+<style>
+    .page-wrapper {
+        display: grid;
+        /* Left: auto (fits content), Middle: remaining space, Right: auto (mirrors left) */
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        justify-content: center; /* Centers the 3-column block on screen */
+        justify-items: stretch;  /* let each cell's content fill its column */
+        gap: 0rem;
+        align-items: start;
+    }
+
+    .toc-sidebar {
+        position: sticky;
+        top: 2rem;
+        display: grid;
+        justify: center;
+    }
+
+    .toc-balancer {
+        /* Stays in the layout (so it still contributes width) but isn't visible */
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .main-content {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Hide sidebar and spacer on smaller screens */
+    @media (max-width: 1200px) {
+        .page-wrapper {
+            grid-template-columns: minmax(0, 800px);
+        }
+
+        .toc-sidebar,
+        .toc-balancer {
+            display: none;
+        }
+    }
+</style>
