@@ -78,42 +78,22 @@ if (format === 'rendercv' && rc) {
               <div class="cv-card">
                 <h3 class="card-title font-weight-medium">Contact Information</h3>
                 <table class="table table-cv table-sm table-borderless">
-                  {rc.name && (
-                    <tr>
-                      <td class="p-1 pr-2 font-bold">Name</td>
-                      <td class="p-1 pl-2 font-light">{rc.name}</td>
-                    </tr>
-                  )}
                   {rc.email && (
                     <tr>
                       <td class="p-1 pr-2 font-bold">Email</td>
                       <td class="p-1 pl-2 font-light">{rc.email}</td>
                     </tr>
                   )}
-                  {rc.phone && (
+                  {/* {rc.phone && (
                     <tr>
                       <td class="p-1 pr-2 font-bold">Phone</td>
                       <td class="p-1 pl-2 font-light">{rc.phone}</td>
                     </tr>
-                  )}
+                  )} */}
                   {rc.location && (
                     <tr>
                       <td class="p-1 pr-2 font-bold">Location</td>
                       <td class="p-1 pl-2 font-light">{rc.location}</td>
-                    </tr>
-                  )}
-                  {rc.website && (
-                    <tr>
-                      <td class="p-1 pr-2 font-bold">Website</td>
-                      <td class="p-1 pl-2 font-light">
-                        <a
-                          href={rc.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {rc.website}
-                        </a>
-                      </td>
                     </tr>
                   )}
                 </table>
@@ -126,7 +106,7 @@ if (format === 'rendercv' && rc) {
               <a class="anchor" id="summary" />
               <div class="cv-card">
                 <h3 class="card-title font-weight-medium">Professional Summary</h3>
-                <p class="card-text font-light">{rc.summary}</p>
+                <p class="card-text font-light text-sm">{rc.summary}</p>
               </div>
             </>
           )}
@@ -140,11 +120,11 @@ if (format === 'rendercv' && rc) {
                         {index > 0 && (<hr class="divider" />)}
                         <CVEntry
                           key={e.id}
-                        title={e.position ?? ''}
-                        subtitle={e.company}
-                        location={e.location}
-                        dates={formatDateRange(e.start_date, e.end_date)}
-                        highlights={e.highlights}
+                          title={e.position ?? ''}
+                          subtitle={e.company}
+                          location={e.location}
+                          dates={formatDateRange(e.start_date, e.end_date)}
+                          highlights={e.highlights}
                       />
                     </div>
                   ))}
@@ -193,16 +173,19 @@ if (format === 'rendercv' && rc) {
           )}
 
           {awards.length > 0 && (
-            <CVSection title="Honors &amp; Awards" id="awards">
+            <CVSection title="Honors & Awards" id="awards">
               <ul class="card-text font-light list-group list-group-flush">
-                {awards.map((e) => (
-                  <CVEntry
-                    key={e.id}
-                    title={e.name ?? ''}
-                    subtitle={e.issuer}
-                    dates={formatCVDate(e.date)}
-                    highlights={e.highlights}
-                  />
+                {awards.map((e, index) => (
+                  <div>
+                    {index > 0 && (<hr class="divider" />)}
+                    <CVEntry
+                      key={e.id}
+                      title={e.name ?? ''}
+                      subtitle={e.issuer}
+                      dates={formatCVDate(e.date)}
+                      highlights={e.highlights}
+                    />
+                  </div>
                 ))}
               </ul>
             </CVSection>
@@ -212,7 +195,7 @@ if (format === 'rendercv' && rc) {
             <CVSection title="Skills" id="skills">
               <div class="card-text font-light">
                 {skills.map((e) => (
-                  <div class="skill-item" key={e.id}>
+                  <div class="skill-item text-md" key={e.id}>
                     <strong>{e.label}:</strong> {e.details}
                   </div>
                 ))}
@@ -236,14 +219,23 @@ if (format === 'rendercv' && rc) {
 
       <!-- Floating button: placed here, outside the wrapper -->
       <a
+        
         href={CV_PDF_PATH}
         target="_blank"
         rel="noopener noreferrer"
         class="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 px-4 py-3 rounded-full shadow-lg transition-shadow ease-in-out hover:ring-2 hover:ring-(--color-border)" 
-        style="background-color: var(--color-primary); color: var(--color-secondary); focus:ring-color: var(--color-border);"
+        style="background-color: var(--color-secondary); color: var(--color-primary); focus:ring-color: var(--color-border);"
         aria-label="Download CV PDF"
       >
-        <Image src={pdfIcon} alt="" width={20} height={20} />
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 576 512"
+          width={20}
+          height={20}
+          style={{ fill: 'var(--color-primary)' }}
+        >
+          <path d="M96 0C60.7 0 32 28.7 32 64l0 384c0 35.3 28.7 64 64 64l80 0 0-112c0-35.3 28.7-64 64-64l176 0 0-165.5c0-17-6.7-33.3-18.7-45.3L290.7 18.7C278.7 6.7 262.5 0 245.5 0L96 0zM357.5 176L264 176c-13.3 0-24-10.7-24-24L240 58.5 357.5 176zM240 380c-11 0-20 9-20 20l0 128c0 11 9 20 20 20s20-9 20-20l0-28 12 0c33.1 0 60-26.9 60-60s-26.9-60-60-60l-32 0zm32 80l-12 0 0-40 12 0c11 0 20 9 20 20s-9 20-20 20zm96-80c-11 0-20 9-20 20l0 128c0 11 9 20 20 20l32 0c28.7 0 52-23.3 52-52l0-64c0-28.7-23.3-52-52-52l-32 0zm20 128l0-88 12 0c6.6 0 12 5.4 12 12l0 64c0 6.6-5.4 12-12 12l-12 0zm88-108l0 128c0 11 9 20 20 20s20-9 20-20l0-44 28 0c11 0 20-9 20-20s-9-20-20-20l-28 0 0-24 28 0c11 0 20-9 20-20s-9-20-20-20l-48 0c-11 0-20 9-20 20z"/>
+        </svg>
         <span class="text-sm font-medium hidden sm:inline">Download PDF</span>
       </a>
 

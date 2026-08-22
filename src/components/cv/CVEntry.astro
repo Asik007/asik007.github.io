@@ -11,43 +11,40 @@ interface Props {
 const { title, subtitle, location, dates, highlights = [], url } = Astro.props;
 ---
 
-<li class="flex gap-6 last:border-b-0">
-  <div class="flex-1 min-w-0">
+
+
+<li class="item">
+  <div class="content">
     {/* Header: Title + Date Badge */}
-    <div class="flex items-start justify-between gap-4 mb-2">
+    <div class="header">
       <div>
         {url ? (
-          <h6 class="text-xl font-bold transition-colors" style="color: var(--color-text);">
-            <a href={url} target="_blank" rel="noopener noreferrer" 
-            class="hover:underline" style="color: var(--color-text);">
+          <h6 class="title">
+            <a href={url} target="_blank" rel="noopener noreferrer" class="title-link">
               {title}
             </a>
           </h6>
         ) : (
-          <h6 class="text-xl font-bold" style="color: var(--color-text);">{title}</h6>
+          <h6 class="title">{title}</h6>
         )}
       </div>
-      {dates && (
-        <span class="inline-block whitespace-nowrap text-md font-bold uppercase flex-shrink-0" style="color: var(--color-danger-dark); background-color: var(--color-danger-light);">
-          {dates}
-        </span>
-      )}
+      {dates && <span class="dates">{dates}</span>}
     </div>
 
     {/* Subtitle + Location */}
     {(subtitle || location) && (
-      <div class="flex items-center justify-between gap-4 mb-3 text-sm">
-        {subtitle && <p style="color: var(--color-text-secondary);">{subtitle}</p>}
-        {location && <p class="text-right" style="color: var(--color-text-secondary);">{location}</p>}
+      <div class="meta">
+        {subtitle && <p>{subtitle}</p>}
+        {location && <p class="location">{location}</p>}
       </div>
     )}
 
     {/* Highlights */}
     {highlights.length > 0 && (
-      <ul class="space-y-2 ml-4 text-sm" style="color: var(--color-text);">
+      <ul class="highlights">
         {highlights.map((highlight) => (
-          <li class="flex gap-2">
-            <span class="flex-shrink-0" style="color: var(--color-accent);">•</span>
+          <li class="highlight-item">
+            <span class="highlight-bullet">•</span>
             <span set:html={highlight} />
           </li>
         ))}
@@ -55,3 +52,97 @@ const { title, subtitle, location, dates, highlights = [], url } = Astro.props;
     )}
   </div>
 </li>
+
+
+<style>
+  .item {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+
+  .item:last-child {
+    border-bottom: none;
+  }
+
+  .content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    transition: color 0.2s;
+    color: var(--color-text-bold); 
+    /* bold means the text should be darker in light and lighter in dark */
+    margin: 0;
+  }
+
+  .title-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .title-link:hover {
+    text-decoration: underline;
+  }
+
+  .dates {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    color: var(--color-secondary);
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--color-secondary);
+  }
+
+  .meta p {
+    margin: 0;
+  }
+
+  .location {
+    text-align: right;
+  }
+
+  .highlights {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-left: 1rem;
+    font-size: 0.875rem;
+    color: var(--color-secondary);
+  }
+
+  .highlight-item {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .highlight-bullet {
+    flex-shrink: 0;
+    color: var(--color-accent);
+  }
+</style>
