@@ -5,9 +5,11 @@ export const SITE_TITLE = 'Astro Blog';
 export const SITE_DESCRIPTION = 'Welcome to my website!';
 
 export const NAV_LINKS = [
-  { title: 'Home', href: '/' },
+  // { title: 'Home', href: '/' },
   { title: 'About', href: '/about' },
   { title: 'Blog', href: '/blog' },
+  { title: 'Projects', href: '/projects' },
+  { title: 'CV', href: '/CV' },
 ];
 
 export const LINKED_IN_URL = 'https://www.linkedin.com/in/asik007/';
