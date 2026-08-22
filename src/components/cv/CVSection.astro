@@ -8,7 +8,7 @@ const { title, id } = Astro.props;
 ---
 
 <a class="anchor" id={id}></a>
-<div class="card mt-3 p-3">
+<div class="card mt-3 p-3 border rounded shadow-sm" style="background-color: var(--color-primary); color: var(--color-secondary);">
   <h3 class="card-title font-weight-medium">{title}</h3>
   <div>
     <slot />

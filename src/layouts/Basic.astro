@@ -3,18 +3,25 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+export interface Props {
+  bg_color?: string;
+  fg_color?: string;
+}
+
+const { bg_color, fg_color } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body style=" background-color: var(--color-background)">
-		<Header />
-		<main style="color: var(--color-text);">
-			<slot />
-		</main>
-		<Footer />
-	</body>
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body style={`background-color: ${bg_color || 'var(--color-primary)'};`}>
+        <Header />
+        <main style={`color: ${fg_color || 'var(--color-secondary)'};`}>
+            <slot />
+        </main>
+        <Footer />
+    </body>
 </html>

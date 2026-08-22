@@ -18,17 +18,8 @@ import {getCollection} from 'astro:content';
 const cvEntries = await getCollection('cv');
 const cvEntry = cvEntries[0]; // Get the first (and only) entry
 
-// Access the data
-// const { sections } = cvEntry;
-
-// import resumeData from '../content/cv/resume.json';
-// import { getCollection } from 'astro:content';
-
 // const format = site.cv.format;
 const format = 'rendercv'; // or 'jsonresume' depending on your data
-
-// const renderCV = format === 'rendercv' ? () : null;
-// const jsonResume = format === 'jsonresume' ? (resumeData as JSONResume) : null;
 
 const rc = cvEntry.data ?? null;
 const education = rc?.sections?.education ?? [];
@@ -38,7 +29,7 @@ const awards = rc?.sections?.awards ?? [];
 const skills = rc?.sections?.skills ?? []
 const interests = rc?.sections?.interests ?? [];
 
-console.log('CV Entry:', rc);
+// console.log('CV Entry:', rc);
 // console.log('Education:', education);
 // console.log('Experience:', experience);
 // console.log('Publications:', rcPublications);
@@ -61,9 +52,9 @@ if (format === 'rendercv' && rc) {
   if (interests.length > 0) tocItems.push({ label: 'Interests', href: '#interests' });
 }
 
-console.log('TOC Items:', tocItems);
+// console.log('TOC Items:', tocItems);
 ---
-<Page title="CV" description={`Curriculum vitae of ${rc.name ?? 'the author'}`}>
+<Page fg_color='var(--color-primary)' >
   <div class="post">
     <!-- Header -->
 
@@ -75,7 +66,7 @@ console.log('TOC Items:', tocItems);
         {tocItems.length > 0 && (
           <nav
             class="hidden md:block shrink-0 w-44 sticky top-20 max-h-[calc(100vh-100px)] overflow-y-auto"
-            style="color: var(--color-text);  border-radius: 0.5rem; border-color: var(--color-border); border-width: 3px; "
+            style="color: var(--color-secondary);  border-radius: 0.5rem; border-color: var(--color-border); border-width: 3px; "
             aria-label="CV sections"
           >
             <ul class="list-none p-0 m-0">
@@ -85,7 +76,7 @@ console.log('TOC Items:', tocItems);
                     href={item.href}
                     class="block py-1 pl-3 text-sm no-underline transition-ease-in-out font-mono; 
                     hover:border-b-2 hover:border-color: var(--color-border)  hover:scale-105"
-                    style="color: var(--color-text); background-color: var(--color-primary);"
+                    style="color: var(--color-secondary); background-color: var(--color-primary);"
                   >
                     {item.label}
                   </a>
@@ -96,7 +87,7 @@ console.log('TOC Items:', tocItems);
         )}
 
         <!-- Main CV content – fills remaining space -->
-        <div class="flex-1 min-w-0 shadow-lg" style="background-color: var(--color-primary); color: var(--color-text);">
+        <div class="flex-1 min-w-0" style="background-color: var(--color-primary); color: var(--color-secondary);">
           
               <header class="post-header">
                 <h1 class="post-title text-center">
@@ -108,7 +99,7 @@ console.log('TOC Items:', tocItems);
             {rc && (rc.name || rc.email || rc.phone || rc.website || rc.location) && (
               <>
                 <a class="anchor" id="contact" />
-                <div class="card mt-3 p-3">
+                <div class="card mt-3 p-3 border rounded shadow-sm border-color: var(--color-border);">
                   <h3 class="card-title font-weight-medium">Contact Information</h3>
                   <table class="table table-cv table-sm table-borderless">
                     {rc.name && (
@@ -157,7 +148,7 @@ console.log('TOC Items:', tocItems);
             {rc?.summary && (
               <>
                 <a class="anchor" id="summary" />
-                <div class="card mt-3 p-3">
+                <div class="card mt-3 p-3 border rounded shadow-sm border-color: var(--color-border);">
                   <h3 class="card-title font-weight-medium">Professional Summary</h3>
                   <p class="card-text font-light">{rc.summary}</p>
                 </div>
@@ -166,33 +157,41 @@ console.log('TOC Items:', tocItems);
 
             {education.length > 0 && (
               <CVSection title="Education" id="education">
-                <ul class="card-text font-light list-group list-group-flush">
-                  {education.map((e) => (
-                    <CVEntry
-                      key={e.id}
-                      title={[e.degree, e.area].filter(Boolean).join(' in ')}
-                      subtitle={e.institution}
-                      location={e.location}
-                      dates={formatDateRange(e.start_date, e.end_date)}
-                      highlights={e.highlights}
-                    />
-                  ))}
-                </ul>
+                <div class="card-body">
+                    <ul class="card-text font-light list-group list-group-flush">
+                      {experience.map((e, index) => (
+                        <div key={e.id}>
+                          {index > 0 && (<hr class="divider" />)}
+                          <CVEntry
+                            key={e.id}
+                          title={e.position ?? ''}
+                          subtitle={e.company}
+                          location={e.location}
+                          dates={formatDateRange(e.start_date, e.end_date)}
+                          highlights={e.highlights}
+                        />
+                      </div>
+                    ))}
+                  </ul>
+                </div>
               </CVSection>
             )}
 
             {experience.length > 0 && (
               <CVSection title="Experience" id="experience">
                 <ul class="card-text font-light list-group list-group-flush">
-                  {experience.map((e) => (
-                    <CVEntry
-                      key={e.id}
-                      title={e.position ?? ''}
-                      subtitle={e.company}
-                      location={e.location}
-                      dates={formatDateRange(e.start_date, e.end_date)}
-                      highlights={e.highlights}
-                    />
+                  {experience.map((e, index) => (
+                    <div key={e.id} style="margin-bottom: 1rem;">
+                      {index > 0 && (<hr class="divider" />)}
+                      <CVEntry
+                        key={e.id}
+                        title={e.position ?? ''}
+                        subtitle={e.company}
+                        location={e.location}
+                        dates={formatDateRange(e.start_date, e.end_date)}
+                        highlights={e.highlights}
+                      />
+                    </div>
                   ))}
                 </ul>
               </CVSection>
@@ -201,14 +200,17 @@ console.log('TOC Items:', tocItems);
             {rcPublications.length > 0 && (
               <CVSection title="Selected Publications" id="publications">
                 <ul class="card-text font-light list-group list-group-flush">
-                  {rcPublications.map((e) => (
-                    <CVEntry
-                      key={e.id}
-                      title={e.title ?? ''}
-                      subtitle={[e.authors?.join(', '), e.journal].filter(Boolean).join(' — ')}
-                      dates={formatCVDate(e.date)}
-                      url={e.doi ? `https://doi.org/${e.doi}` : e.url}
-                    />
+                  {rcPublications.map((e, index) => (
+                    <div>
+                      {index > 0 && (<hr class="divider" />)}
+                      <CVEntry
+                        key={e.id}
+                        title={e.title ?? ''}
+                        subtitle={[e.authors?.join(', '), e.journal].filter(Boolean).join(' — ')}
+                        dates={formatCVDate(e.date)}
+                        url={e.doi ? `https://doi.org/${e.doi}` : e.url}
+                      />
+                  </div>
                   ))}
                 </ul>
               </CVSection>

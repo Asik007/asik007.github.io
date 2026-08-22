@@ -39,6 +39,7 @@
 
 }
 
+
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
@@ -93,7 +94,7 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0 0 0.5rem 0;
+	margin: .5rem 0 0 0;
 	color: rgb(var(--black));
 	line-height: 1.2;
 }
@@ -123,7 +124,7 @@ a:hover {
 	color: var(--accent);
 }
 p {
-	margin-bottom: 1em;
+	/* margin-bottom: 1em; */
 }
 .prose p {
 	margin-bottom: 2em;
@@ -148,6 +149,14 @@ code {
 	background-color: rgb(var(--gray-light));
 	border-radius: 2px;
 }
+
+.divider {
+	border: 0; 
+	border-top: 3px solid var(--color-border); 
+	margin: 0 auto; 
+	width: 50%;
+}
+
 pre {
 	padding: 1.5em;
 	border-radius: 8px;

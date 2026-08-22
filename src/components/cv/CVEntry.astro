@@ -1,83 +1,57 @@
 ---
 interface Props {
-  /** Main title line (job title, degree, paper title). */
   title: string;
-  /** Secondary line (institution, company, journal). */
   subtitle?: string;
-  /** Location string — shown below date badge. */
   location?: string;
-  /** Date range or single date string (already formatted). */
   dates?: string;
-  /** Bullet points. */
   highlights?: string[];
-  /** URL to make the title a link. */
   url?: string;
 }
 
 const { title, subtitle, location, dates, highlights = [], url } = Astro.props;
 ---
 
-<li class="list-group-item">
-  <div class="row">
-    <div class="col-xs-2 col-sm-2 col-md-2 date-column text-center">
-      <table class="table-cv">
-        <tbody>
-          <tr>
-            <td>
-              {
-                dates && (
-                  <span
-                    class="badge font-weight-bold danger-color-dark text-uppercase align-middle"
-                    style="min-width: 75px;"
-                  >
-                    {dates}
-                  </span>
-                )
-              }
-            </td>
-          </tr>
-          {
-            location && (
-              <tr>
-                <td>
-                  <p class="location">{location}</p>
-                </td>
-              </tr>
-            )
-          }
-        </tbody>
-      </table>
-    </div>
-    <div class="col-xs-10 col-sm-10 col-md-10 mt-md-0 mt-2">
-      {
-        url ? (
-          <h6 class="title font-weight-bold ml-md-4 ml-1">
-            <a href={url} target="_blank" rel="noopener noreferrer">
+<li class="flex gap-6 last:border-b-0">
+  <div class="flex-1 min-w-0">
+    {/* Header: Title + Date Badge */}
+    <div class="flex items-start justify-between gap-4 mb-2">
+      <div>
+        {url ? (
+          <h6 class="text-xl font-bold transition-colors" style="color: var(--color-text);">
+            <a href={url} target="_blank" rel="noopener noreferrer" 
+            class="hover:underline" style="color: var(--color-text);">
               {title}
             </a>
           </h6>
         ) : (
-          <h6 class="title font-weight-bold ml-md-4 ml-1">{title}</h6>
-        )
-      }
-      {
-        subtitle && (
-          <h6 class="ml-md-4 ml-1" style="font-size: 0.95rem;">
-            {subtitle}
-          </h6>
-        )
-      }
-      {
-        highlights.length > 0 && (
-          <ul class="items">
-            {highlights.map((h) => (
-              <li>
-                <span class="item" set:html={h} />
-              </li>
-            ))}
-          </ul>
-        )
-      }
+          <h6 class="text-xl font-bold" style="color: var(--color-text);">{title}</h6>
+        )}
+      </div>
+      {dates && (
+        <span class="inline-block whitespace-nowrap text-md font-bold uppercase flex-shrink-0" style="color: var(--color-danger-dark); background-color: var(--color-danger-light);">
+          {dates}
+        </span>
+      )}
     </div>
+
+    {/* Subtitle + Location */}
+    {(subtitle || location) && (
+      <div class="flex items-center justify-between gap-4 mb-3 text-sm">
+        {subtitle && <p style="color: var(--color-text-secondary);">{subtitle}</p>}
+        {location && <p class="text-right" style="color: var(--color-text-secondary);">{location}</p>}
+      </div>
+    )}
+
+    {/* Highlights */}
+    {highlights.length > 0 && (
+      <ul class="space-y-2 ml-4 text-sm" style="color: var(--color-text);">
+        {highlights.map((highlight) => (
+          <li class="flex gap-2">
+            <span class="flex-shrink-0" style="color: var(--color-accent);">•</span>
+            <span set:html={highlight} />
+          </li>
+        ))}
+      </ul>
+    )}
   </div>
 </li>
