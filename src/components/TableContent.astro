@@ -23,12 +23,14 @@ const { items } = Astro.props;
         "
         aria-label="CV sections"
     >
-        <ul class="list-none p-0 m-0">
+        <ul class="list-none p-1 m-0">
         {items.map((item) => (
             <li key={item.href}>
             <a
                 href={item.href}
-                class="block py-1 pl-3 text-sm no-underline transition-ease-in-out font-mono hover:border-b-2 hover:scale-105"
+                class=" py-1 text-sm no-underline 
+                    transition-ease-in-out font-mono 
+                    hover:border-b-2 hover:scale-105"
                 style="
                 color: var(--color-secondary);
                 background-color: var(--color-primary);
