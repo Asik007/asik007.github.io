@@ -34,32 +34,10 @@ const ogImageURL = heroImage
 ---
 
 <BaseLayout tocItems={tocItems}>
-  <Fragment slot="head">
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalURL} />
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalURL} />
-    {ogImageURL && <meta property="og:image" content={ogImageURL} />}
-    <meta property="article:published_time" content={pubDate.toISOString()} />
-    {updatedDate && (
-      <meta property="article:modified_time" content={updatedDate.toISOString()} />
-    )}
-    {tags.map((tag) => <meta property="article:tag" content={tag} />)}
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
-  </Fragment>
 
   <article class="blog-post">
-    <div class="prose border-2">
+    <!-- <div class="prose border-2"> -->
 
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <ol>
@@ -104,7 +82,7 @@ const ogImageURL = heroImage
       </div>
 
       <slot />
-    </div>
+    <!-- </div> -->
   </article>
 </BaseLayout>
 

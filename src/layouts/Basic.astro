@@ -9,37 +9,32 @@ export interface Props {
   bg_color?: string;
   fg_color?: string;
   tocItems?: { label: string; href: string }[]; // Optional prop for TOC items
+  image?: string; // Optional prop for the image. URL to the image
 }
 
-const { bg_color, fg_color, tocItems } = Astro.props;
+// const metaImage = Astro.props.image; // Default to favicon if no image is provided
+
+const { bg_color, fg_color, tocItems, image } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} headerImage={image} />
     </head>
     <body style={`background-color: ${bg_color || 'var(--color-primary)'};`}>
         <Header />
 
         <div class="page-wrapper">
-            <!-- Left Column: Table of Contents (sized to its own content) -->
+            <!-- Left: Table of Contents (sticky) -->
             <aside class="toc-sidebar">
                 {tocItems && tocItems.length > 0 && <TableContent items={tocItems} />}
             </aside>
 
-            <!-- Middle Column: fills remaining space -->
+            <!-- Right: main content -->
             <main class="main-content" style={`color: ${fg_color || 'var(--color-secondary)'};`}>
                 <slot />
             </main>
-
-            <!-- Right Column: duplicate TOC, invisible but still occupies space,
-                 forcing the right column to match the left column's width -->
-            {tocItems && tocItems.length > 0 && (
-                <div class="toc-balancer" aria-hidden="true">
-                    <TableContent items={tocItems} />
-                </div>
-            )}
         </div>
 
         <Footer />
@@ -48,42 +43,41 @@ const { bg_color, fg_color, tocItems } = Astro.props;
 
 <style>
     .page-wrapper {
-        display: grid;
-        /* Left: auto (fits content), Middle: remaining space, Right: auto (mirrors left) */
-        grid-template-columns: auto minmax(0, 1fr) auto;
-        justify-content: center; /* Centers the 3-column block on screen */
-        justify-items: stretch;  /* let each cell's content fill its column */
-        gap: 0rem;
-        align-items: start;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 2rem;               /* spacing between ToC and content */
+        padding: 0 1rem;         /* 1rem on each side */
+        max-width: 1200px;       /* optional: limits the overall width */
+        margin: 0 auto;          /* centers the whole column */
     }
 
     .toc-sidebar {
         position: sticky;
         top: 2rem;
-        display: grid;
-        justify: center;
-    }
-
-    .toc-balancer {
-        /* Stays in the layout (so it still contributes width) but isn't visible */
-        visibility: hidden;
-        pointer-events: none;
+        flex-shrink: 0;          /* keep its own width */
+        /* optional: set a max-width if the ToC gets too wide */
+        max-width: 250px;
     }
 
     .main-content {
-        width: 100%;
+        flex: 1;                 /* takes the remaining space */
+        min-width: 0;            /* prevent overflow */
         box-sizing: border-box;
     }
 
-    /* Hide sidebar and spacer on smaller screens */
+    /* On smaller screens: stack ToC above content */
     @media (max-width: 1200px) {
         .page-wrapper {
-            grid-template-columns: minmax(0, 800px);
+            flex-direction: column;
+            align-items: stretch;
+            gap: 1.5rem;
         }
 
-        .toc-sidebar,
-        .toc-balancer {
-            display: none;
+        .toc-sidebar {
+            position: static;    /* no longer sticky */
+            max-width: none;
         }
     }
 </style>
