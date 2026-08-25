@@ -1,86 +1,195 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import BaseLayout from './Basic.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+  tocItems?: { label: string; href: string }[];
+};
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  heroImageAlt,
+  tags = [],
+} = Astro.props;
+
+const exampleToC = [
+  { label: 'Introduction', href: '#introduction' },
+  { label: 'Main Content', href: '#main-content' },
+  { label: 'Conclusion', href: '#conclusion' },
+];
+
+const tocItems = Astro.props.tocItems || exampleToC;
+
+// --- Minimal SEO helpers ---
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = heroImage
+  ? new URL(typeof heroImage === 'string' ? heroImage : heroImage.src, Astro.site)
+  : undefined;
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+<BaseLayout tocItems={tocItems}>
+  <Fragment slot="head">
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
-</html>
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    {ogImageURL && <meta property="og:image" content={ogImageURL} />}
+    <meta property="article:published_time" content={pubDate.toISOString()} />
+    {updatedDate && (
+      <meta property="article:modified_time" content={updatedDate.toISOString()} />
+    )}
+    {tags.map((tag) => <meta property="article:tag" content={tag} />)}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
+  </Fragment>
+
+  <article class="blog-post">
+    <div class="prose border-2">
+
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li aria-current="page">{title}</li>
+        </ol>
+      </nav>
+
+      <div class="hero-image py-6">
+        {heroImage && (
+          <Image
+            width={1020}
+            height={510}
+            src={heroImage}
+            alt={heroImageAlt || title}
+          />
+        )}
+      </div>
+
+      <div class="title">
+        <div class="date">
+          <FormattedDate date={pubDate} />
+          {updatedDate && (
+            <div class="last-updated-on">
+              Last updated on <FormattedDate date={updatedDate} />
+            </div>
+          )}
+        </div>
+
+        <h1>{title}</h1>
+
+        {tags.length > 0 && (
+          <ul class="tags">
+            {tags.map((tag) => (
+              <li class="tag">{tag}</li>
+            ))}
+          </ul>
+        )}
+
+        <hr />
+      </div>
+
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  main {
+    max-width: 100%;
+    margin: 0;
+  }
+  .hero-image {
+    width: 100%;
+  }
+  .hero-image img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+  }
+  .prose {
+    max-width: calc(75%);
+    margin: auto;
+    padding: 1em;
+    color: rgb(var(--gray-dark));
+  }
+
+  .breadcrumbs {
+    margin-bottom: 1em;
+    font-size: 0.85em;
+    color: rgb(var(--gray));
+  }
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35em;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .breadcrumbs li:not(:last-child)::after {
+    content: '/';
+    margin-left: 0.35em;
+    color: rgb(var(--gray));
+  }
+  .breadcrumbs a {
+    color: rgb(var(--gray));
+    text-decoration: none;
+  }
+  .breadcrumbs a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumbs li[aria-current='page'] {
+    color: rgb(var(--gray-dark));
+    font-weight: 500;
+  }
+
+  .title {
+    margin-bottom: 1em;
+    padding: 1em 0;
+    text-align: center;
+    line-height: 1;
+  }
+  .title h1 {
+    margin: 0 0 0.5em 0;
+  }
+  .date {
+    margin-bottom: 0.5em;
+    color: rgb(var(--gray));
+  }
+  .last-updated-on {
+    font-style: italic;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5em;
+    list-style: none;
+    padding: 0;
+    margin: 0.5em 0 1em;
+  }
+  .tag {
+    font-size: 0.75em;
+    padding: 0.25em 0.75em;
+    border-radius: 999px;
+    background: rgb(var(--gray-light, 230 230 230));
+    color: rgb(var(--gray-dark));
+  }
+</style>

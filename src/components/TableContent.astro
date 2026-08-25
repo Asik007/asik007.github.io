@@ -17,9 +17,9 @@ const { items } = Astro.props;
         class="hidden md:block shrink-0 w-44 sticky top-20 max-h-[calc(100vh-100px)] overflow-y-auto"
         style="
         color: var(--color-secondary);
-        border-radius: 0.5rem;
-        border-color: var(--color-border);
-        border-width: 3px;
+        // border-radius: 0.5rem;
+        // border-color: var(--color-border);
+        // border-width: 3px;
         "
         aria-label="CV sections"
     >
@@ -28,9 +28,9 @@ const { items } = Astro.props;
             <li key={item.href}>
             <a
                 href={item.href}
-                class=" py-1 text-sm no-underline 
+                class=" py-1 text-sm no-underline p-1 
                     transition-ease-in-out font-mono 
-                    hover:border-b-2 hover:scale-105"
+                    hover:border-l-2 hover:scale-105 hover:translate-0.5"
                 style="
                 color: var(--color-secondary);
                 background-color: var(--color-primary);
