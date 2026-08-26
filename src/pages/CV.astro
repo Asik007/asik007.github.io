@@ -1,13 +1,14 @@
 ---
 import CVEntry from '../components/cv/CVEntry.astro';
 import CVSection from '../components/cv/CVSection.astro';
-import TableContent from '../components/TableContent.astro';
-
 import { Image } from 'astro:assets';
+import TableContent from '../components/TableContent.astro';
+import CV_image from '../content/cv/cv-image.jpg';
+
 import pdfIcon from '../assets/pdf.svg'; 
 import { CV_PDF_PATH } from '../consts';
 // import { site } from '../config/site';
-import Page from '../layouts/Basic.astro';
+import Page from '../layouts/BlogPost.astro';
 // import { withBase } from '../utils/base';
 // import type { JSONResume, RenderCV, RenderCVEntry } from '../utils/cv';
 import { formatCVDate, formatDateRange } from '../utils/cv';
@@ -39,68 +40,73 @@ const interests = rc?.sections?.interests ?? [];
 // console.log('Interests:', interests);
 
 // Build sidebar TOC items based on which sections have data
-type TocItem = { label: string; href: string };
+type TocItem = {depth: number; label: string; href: string };
 
 const tocItems: TocItem[] = [];
 if (format === 'rendercv' && rc) {
-  if (rc.name || rc.email || rc.phone) tocItems.push({ label: 'Contact Information', href: '#contact' });
-  if (rc.summary) tocItems.push({ label: 'Professional Summary', href: '#summary' });
-  if (education.length > 0) tocItems.push({ label: 'Education', href: '#education' });
-  if (experience.length > 0) tocItems.push({ label: 'Experience', href: '#experience' });
-  if (rcPublications.length > 0) tocItems.push({ label: 'Publications', href: '#publications' });
-  if (awards.length > 0) tocItems.push({ label: 'Awards', href: '#awards' });
-  if (skills.length > 0) tocItems.push({ label: 'Skills', href: '#skills' });
-  if (interests.length > 0) tocItems.push({ label: 'Interests', href: '#interests' });
+  if (rc.name || rc.email || rc.phone) tocItems.push({depth: 1, text: 'Contact Information', slug: 'contact' });
+  if (rc.summary) tocItems.push({ depth: 1, text: 'Professional Summary', slug: 'summary' });
+  if (education.length > 0) tocItems.push({ depth: 1, text: 'Education', slug: 'education' });
+  if (experience.length > 0) tocItems.push({ depth: 1, text: 'Experience', slug: 'experience' });
+  if (rcPublications.length > 0) tocItems.push({ depth: 1, text: 'Publications', slug: 'publications' });
+  if (awards.length > 0) tocItems.push({ depth: 1, text: 'Awards', slug: 'awards' });
+  if (skills.length > 0) tocItems.push({ depth: 1, text: 'Skills', slug: 'skills' });
+  if (interests.length > 0) tocItems.push({ depth: 1, text: 'Interests', slug: 'interests' });
 }
+
+// const publishedDate = Date.parse("2026-08-26T15:00:00-05:00");
 
 // console.log('TOC Items:', tocItems);
 ---
-<Page fg_color='var(--color-primary)' tocItems={tocItems}> >
-  <div class="post">
-    <!-- Header -->
-
-    <!-- Body -->
-   <article >
-      
+<Page title={rc?.name ?? 'Curriculum Vitae'}  headings={tocItems} image={rc?.image}>      
         <!-- Main CV content – fills remaining space -->
       <div class="flex-1 min-w-0 cv-content" >
         
-            <header class="post-header">
-              <h1 class="post-title text-center">
-                {rc.name ?? 'Curriculum Vitae'}
-              </h1>
-            </header>
         <!-- ── RENDERCV ──────────────────────────────────────────────── -->
         <>
-          {rc && (rc.name || rc.email || rc.phone || rc.website || rc.location) && (
-            <>
-              <a class="anchor" id="contact" />
-              <div class="cv-card">
-                <h3 class="card-title font-weight-medium">Contact Information</h3>
-                <table class="table table-cv table-sm table-borderless">
-                  {rc.email && (
-                    <tr>
-                      <td class="p-1 pr-2 font-bold">Email</td>
-                      <td class="p-1 pl-2 font-light">{rc.email}</td>
-                    </tr>
-                  )}
-                  {/* {rc.phone && (
-                    <tr>
-                      <td class="p-1 pr-2 font-bold">Phone</td>
-                      <td class="p-1 pl-2 font-light">{rc.phone}</td>
-                    </tr>
-                  )} */}
-                  {rc.location && (
-                    <tr>
-                      <td class="p-1 pr-2 font-bold">Location</td>
-                      <td class="p-1 pl-2 font-light">{rc.location}</td>
-                    </tr>
-                  )}
-                </table>
-              </div>
-            </>
-          )}
+{rc && (rc.name || rc.email || rc.phone || rc.website || rc.location) && (
+  <>
+    <a class="anchor" id="contact" />
+    <div class="cv-card">
+      <div class="grid grid-cols-3">
+        {/* Title - spans columns 1-2 */}
+        <h3 class="card-title font-weight-medium w-auto col-span-2">Contact Information</h3>
+        
+        {/* Image - column 3, rows 1-X */}
+        <div class="relative row-span-4 aspect-square">
+          <Image
+            src={CV_image}
+            alt=""
+            width={200}
+            height={200}
+            class="rounded-full object-cover w-full h-full"
+          />
+        </div>
 
+        {/* Contact rows */}
+        {rc.email && (
+          <>
+            <div class="p-1 pr-2 font-bold">Email</div>
+            <div class="p-1 pl-2 font-light">{rc.email}</div>
+          </>
+        )}
+        {rc.location && (
+          <>
+            <div class="p-1 pr-2 font-bold">Location</div>
+            <div class="p-1 pl-2 font-light">{rc.location}</div>
+          </>
+        )}
+        {rc.phone && (
+          <>
+            <div class="p-1 pr-2 font-bold">Phone</div>
+            <div class="p-1 pl-2 font-light">{rc.phone}</div>
+          </>
+        )}
+
+      </div>
+    </div>
+  </>
+)}
           {rc?.summary && (
             <>
               <a class="anchor" id="summary" />
@@ -237,8 +243,10 @@ if (format === 'rendercv' && rc) {
           <path d="M96 0C60.7 0 32 28.7 32 64l0 384c0 35.3 28.7 64 64 64l80 0 0-112c0-35.3 28.7-64 64-64l176 0 0-165.5c0-17-6.7-33.3-18.7-45.3L290.7 18.7C278.7 6.7 262.5 0 245.5 0L96 0zM357.5 176L264 176c-13.3 0-24-10.7-24-24L240 58.5 357.5 176zM240 380c-11 0-20 9-20 20l0 128c0 11 9 20 20 20s20-9 20-20l0-28 12 0c33.1 0 60-26.9 60-60s-26.9-60-60-60l-32 0zm32 80l-12 0 0-40 12 0c11 0 20 9 20 20s-9 20-20 20zm96-80c-11 0-20 9-20 20l0 128c0 11 9 20 20 20l32 0c28.7 0 52-23.3 52-52l0-64c0-28.7-23.3-52-52-52l-32 0zm20 128l0-88 12 0c6.6 0 12 5.4 12 12l0 64c0 6.6-5.4 12-12 12l-12 0zm88-108l0 128c0 11 9 20 20 20s20-9 20-20l0-44 28 0c11 0 20-9 20-20s-9-20-20-20l-28 0 0-24 28 0c11 0 20-9 20-20s-9-20-20-20l-48 0c-11 0-20 9-20 20z"/>
         </svg>
         <span class="text-sm font-medium hidden sm:inline">Download PDF</span>
-      </a>
-
-    </article>
-  </div>
+                  {/* {rc.phone && (
+                    <tr>
+                      <td class="p-1 pr-2 font-bold">Phone</td>
+                      <td class="p-1 pl-2 font-light">{rc.phone}</td>
+                    </tr>
+                  )} */}      </a>
 </Page>

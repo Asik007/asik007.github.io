@@ -30,43 +30,24 @@ const { bg_color, fg_color, tocItems, image } = Astro.props;
     <body style={`background-color: ${bg_color || 'var(--color-primary)'};`}>
         <Header />
 
-        <div class="page-wrapper">
-            <!-- Left: Table ofsrc/pages/blog/index.astro src/pages/blog/[...slug].astro Contents (sticky) -->
-            <aside class="toc-sidebar">
-                {tocItems && tocItems.length > 0 && <TableContent items={tocItems} />}
-            </aside>
-
-            <!-- Right: main content -->
-            <main class="main-content" style={`color: ${fg_color || 'var(--color-secondary)'};`}>
-                <slot />
-            </main>
-        </div>
+        <main class="main-content" style={`color: ${fg_color || 'var(--color-secondary)'}; `}>
+            <slot />
+        </main>
 
         <Footer />
     </body>
 </html>
 
 <style>
-    .page-wrapper {
-        display: grid;
-        grid-template-columns: minmax(0, 250px) 1fr;  /* two columns: sidebar | content */
-        gap: 0 2rem;   /* horizontal gap between columns (vertical gap when stacked) */
-        padding: 0 1rem;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
 
-    .toc-sidebar {
-        align-self: start;  /* prevents stretching to full height of the grid row */
-        position: sticky;
-        top: 2rem;
-        /* max-width is now controlled by the grid column, so you can remove it or keep it */
-    }
+
 
     .main-content {
         /* flex: 1;                 takes the remaining space */
         min-width: 0;            /* prevent overflow */
         box-sizing: border-box;
+        padding: 0 1rem;
+        margin: 0 auto;
     }
 
     /* On smaller screens: stack ToC above content */

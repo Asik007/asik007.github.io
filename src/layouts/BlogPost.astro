@@ -2,119 +2,141 @@
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
+import TableOfContents from '../components/TableContent.astro';
 import BaseLayout from './Basic.astro';
 
 type Props = CollectionEntry<'blog'>['data'] & {
-  title: string;
-  description?: string;
-  tocItems?: { label: string; href: string }[];
-  
+  headings?: { depth: number; slug: string; text: string }[];
 };
 
 const {
   title,
-  description,
   pubDate,
   updatedDate,
   heroImage,
-  heroImageAlt,
   tags = [],
+  headings = [],
 } = Astro.props;
 
-const exampleToC = [
-  { label: 'Introduction', href: '#introduction' },
-  { label: 'Main Content', href: '#main-content' },
-  { label: 'Conclusion', href: '#conclusion' },
-];
+// Convert headings to TOC items (only h2 and h3)
+const tocItems = headings
+  .filter((heading) => heading.depth <= 2)
+  .map((heading) => ({
+    label: heading.text,
+    href: `#${heading.slug}`,
+  }));
 
-const tocItems = Astro.props.tocItems || exampleToC;
-
-// --- Minimal SEO helpers ---
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImageURL = heroImage
-  ? new URL(typeof heroImage === 'string' ? heroImage : heroImage.src, Astro.site)
-  : undefined;
+console.log('TOC Items:', headings, tocItems);
 ---
 
-<BaseLayout tocItems={tocItems}>
-
-
-  <article class="blog-post">
-    <!-- <div class="prose border-2"> -->
-
-      <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <ol>
-          <li><a href="/">Home</a></li>
-          <li><a href="/blog">Blog</a></li>
-          <li aria-current="page">{title}</li>
-        </ol>
-      </nav>
-
-      <div class="hero-image py-6">
+<BaseLayout>
+  <div class="page-container">
+    <article class="blog-grid">
+      <!-- Full-Width Hero Image -->
+      <div class="col-span-full hero-image">
         {heroImage && (
           <Image
             width={1020}
             height={510}
             src={heroImage}
-            alt={heroImageAlt || title}
+            alt={title}
           />
         )}
       </div>
 
-      <div class="title">
-        <div class="date">
-          <FormattedDate date={pubDate} />
-          {updatedDate && (
-            <div class="last-updated-on">
-              Last updated on <FormattedDate date={updatedDate} />
-            </div>
+      <!-- Full-Width Header TODO: needs to be extracted from URL instead--> 
+      <header class="col-span-full article-header">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li aria-current="page">{title}</li>
+          </ol>
+        </nav>
+
+        <div class="title">
+          <div class="date">
+            {pubDate && <FormattedDate date={pubDate} />}
+            {updatedDate && (
+              <div class="last-updated-on">
+                Last updated on <FormattedDate date={updatedDate} />
+              </div>
+            )}
+          </div>
+
+          <h1>{title}</h1>
+
+          {tags.length > 0 && (
+            <ul class="tags">
+              {tags.map((tag) => (
+                <li class="tag">{tag}</li>
+              ))}
+            </ul>
           )}
         </div>
-
-        <h1>{title}</h1>
-
-        {tags.length > 0 && (
-          <ul class="tags">
-            {tags.map((tag) => (
-              <li class="tag">{tag}</li>
-            ))}
-          </ul>
-        )}
-
         <hr />
-      </div>
+      </header>
 
-      <slot />
-    <!-- </div> -->
-  </article>
+      <!-- Sidebar: Table of Contents -->
+      <aside class="toc-sidebar">
+        <TableOfContents items={tocItems} />
+      </aside>
+
+      <!-- Main Content -->
+      <div class="main-content prose">
+        <slot />
+      </div>
+    </article>
+  </div>
 </BaseLayout>
 
 <style>
-  main {
-    max-width: 100%;
-    margin: 0;
+  /* Layout */
+  .page-container {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 1.5rem 1rem;
   }
-  .hero-image {
+
+  .blog-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .col-span-full {
     width: 100%;
   }
+
+  .toc-sidebar {
+    flex: 0 0 auto;
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+    align-self: flex-start;
+  }
+
+  .main-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Hero Image */
   .hero-image img {
-    display: block;
-    margin: 0 auto;
+    width: 100%;
+    height: auto;
     border-radius: 12px;
     box-shadow: var(--box-shadow);
   }
-  .prose {
-    max-width: calc(75%);
-    margin: auto;
-    padding: 1em;
-    color: rgb(var(--gray-dark));
-  }
 
+  /* Breadcrumbs */
   .breadcrumbs {
     margin-bottom: 1em;
     font-size: 0.85em;
     color: rgb(var(--gray));
   }
+
   .breadcrumbs ol {
     display: flex;
     flex-wrap: wrap;
@@ -123,40 +145,48 @@ const ogImageURL = heroImage
     padding: 0;
     margin: 0;
   }
+
   .breadcrumbs li:not(:last-child)::after {
     content: '/';
     margin-left: 0.35em;
     color: rgb(var(--gray));
   }
+
   .breadcrumbs a {
     color: rgb(var(--gray));
     text-decoration: none;
   }
+
   .breadcrumbs a:hover {
     text-decoration: underline;
   }
+
   .breadcrumbs li[aria-current='page'] {
     color: rgb(var(--gray-dark));
     font-weight: 500;
   }
 
+  /* Title Section */
   .title {
     margin-bottom: 1em;
-    padding: 1em 0;
     text-align: center;
     line-height: 1;
   }
+
   .title h1 {
     margin: 0 0 0.5em 0;
   }
+
   .date {
     margin-bottom: 0.5em;
     color: rgb(var(--gray));
   }
+
   .last-updated-on {
     font-style: italic;
   }
 
+  /* Tags */
   .tags {
     display: flex;
     flex-wrap: wrap;
@@ -166,11 +196,31 @@ const ogImageURL = heroImage
     padding: 0;
     margin: 0.5em 0 1em;
   }
+
   .tag {
     font-size: 0.75em;
     padding: 0.25em 0.75em;
     border-radius: 999px;
     background: rgb(var(--gray-light, 230 230 230));
     color: rgb(var(--gray-dark));
+  }
+
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .blog-grid {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .toc-sidebar {
+      position: relative;
+      top: 0;
+      width: 100%;
+    }
+
+    .main-content {
+      width: 100%;
+      flex: none;
+    }
   }
 </style>
