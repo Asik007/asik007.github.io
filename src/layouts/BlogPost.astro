@@ -5,7 +5,10 @@ import FormattedDate from '../components/FormattedDate.astro';
 import BaseLayout from './Basic.astro';
 
 type Props = CollectionEntry<'blog'>['data'] & {
+  title: string;
+  description?: string;
   tocItems?: { label: string; href: string }[];
+  
 };
 
 const {

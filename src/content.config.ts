@@ -14,9 +14,24 @@ const blog = defineCollection({
 			pubDate: z.coerce.date(),
 			updatedDate: z.coerce.date().optional(),
 			heroImage: z.optional(image()),
+      tags: z.array(z.string()).optional(),
 		}),
 });
 
+const projects = defineCollection({
+	// Load Markdown and MDX files in the `src/content/projects/` directory.
+	loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
+	// Type-check frontmatter using a schema
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			description: z.string(),
+      active: z.boolean().optional(),
+			// Transform string to Date object
+			heroImage: z.optional(image()),
+      tags: z.array(z.string()).optional(),
+		}),
+});
 
 // ------------------- Zod Schemas (runtime validation & type inference) -------------------
 
@@ -93,4 +108,4 @@ const cv = defineCollection({
 //   data: z.infer<typeof cv.schema>;
 // };
 
-export const collections = { blog, cv };
+export const collections = { blog, cv, projects };

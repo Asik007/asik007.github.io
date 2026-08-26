@@ -6,11 +6,16 @@ import TableContent from '../components/TableContent.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 export interface Props {
+  site_title?: string,
+  description?: string,
   bg_color?: string;
   fg_color?: string;
   tocItems?: { label: string; href: string }[]; // Optional prop for TOC items
   image?: string; // Optional prop for the image. URL to the image
 }
+
+const title = Astro.props.site_title || SITE_TITLE
+const desc = Astro.props.description || SITE_DESCRIPTION
 
 // const metaImage = Astro.props.image; // Default to favicon if no image is provided
 
@@ -20,13 +25,13 @@ const { bg_color, fg_color, tocItems, image } = Astro.props;
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} headerImage={image} />
+        <BaseHead title={title} description={SITE_DESCRIPTION} headerImage={image} />
     </head>
     <body style={`background-color: ${bg_color || 'var(--color-primary)'};`}>
         <Header />
 
         <div class="page-wrapper">
-            <!-- Left: Table of Contents (sticky) -->
+            <!-- Left: Table ofsrc/pages/blog/index.astro src/pages/blog/[...slug].astro Contents (sticky) -->
             <aside class="toc-sidebar">
                 {tocItems && tocItems.length > 0 && <TableContent items={tocItems} />}
             </aside>
@@ -43,26 +48,23 @@ const { bg_color, fg_color, tocItems, image } = Astro.props;
 
 <style>
     .page-wrapper {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: center;
-        gap: 2rem;               /* spacing between ToC and content */
-        padding: 0 1rem;         /* 1rem on each side */
-        max-width: 1200px;       /* optional: limits the overall width */
-        margin: 0 auto;          /* centers the whole column */
+        display: grid;
+        grid-template-columns: minmax(0, 250px) 1fr;  /* two columns: sidebar | content */
+        gap: 0 2rem;   /* horizontal gap between columns (vertical gap when stacked) */
+        padding: 0 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
     .toc-sidebar {
+        align-self: start;  /* prevents stretching to full height of the grid row */
         position: sticky;
         top: 2rem;
-        flex-shrink: 0;          /* keep its own width */
-        /* optional: set a max-width if the ToC gets too wide */
-        max-width: 250px;
+        /* max-width is now controlled by the grid column, so you can remove it or keep it */
     }
 
     .main-content {
-        flex: 1;                 /* takes the remaining space */
+        /* flex: 1;                 takes the remaining space */
         min-width: 0;            /* prevent overflow */
         box-sizing: border-box;
     }
@@ -70,14 +72,20 @@ const { bg_color, fg_color, tocItems, image } = Astro.props;
     /* On smaller screens: stack ToC above content */
     @media (max-width: 1200px) {
         .page-wrapper {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 1.5rem;
+            grid-template-columns: 1fr;   /* single column */
+            gap: 2rem 0;                  /* vertical gap between stacked items */
+            justify-items: center;        /* center the items horizontally (optional) */
         }
 
         .toc-sidebar {
-            position: static;    /* no longer sticky */
-            max-width: none;
+            position: static;             /* no longer sticky */
+            text-align: center;           /* optional */
+            max-width: 100%;             /* allow full width */
+            justify-self: stretch;        /* make it take full width if you want */
+        }
+
+        .main-content {
+            justify-self: stretch;        /* takes full width */
         }
     }
 </style>
