@@ -1,6 +1,7 @@
 ---
 import PostCard from '../../components/PostCard.astro';
 import Page from '../../layouts/Basic.astro';
+import TagContent  from '../../components/TagContent.astro';
 import { getCollection } from 'astro:content';
 
 interface Post {
@@ -15,6 +16,13 @@ interface Post {
 
 const projects = (await getCollection('projects')) as Post[];
 
+export function getPostsByTag(posts: Post[], tag?: string): Post[] {
+	if(!tag) {
+		return posts;
+	}
+	return posts.filter(post => post.data.tags?.includes(tag));
+}
+
 ---
 
 <Page site_title="Projects" description="Projects by">
@@ -24,14 +32,15 @@ const projects = (await getCollection('projects')) as Post[];
       <p class="post-description">A collection of my projects.</p>
     </header>
 
-    <article>
-      <div class="projects">
+    <article class="flex gap-4">
+		<TagContent Posts={projects}></TagContent>
+      <div class="projects m-2"> 
         {projects.length === 0 ? (
-          <p class="no-projects">No projects yet.</p>
+          <p class="no-projects" id="no-projects">No projects yet.</p>
         ) : (
-			<div class="projects-grid">
+			<div class="projects-grid" id="projects-grid">
 				{projects.map((project) => (
-				<PostCard postObject={project} />
+					<PostCard postObject={project} />
 				))}
 			</div>
         )}
@@ -39,6 +48,75 @@ const projects = (await getCollection('projects')) as Post[];
     </article>
   </div>
 </Page>
+
+<script>
+  // Select all project card wrappers and the "no matches" message
+  const cards = document.querySelectorAll('.cv-card');
+  const noMatches = document.getElementById('no-projects');
+  const projectsGrid = document.getElementById('projects-grid');
+
+  // Function to filter cards based on a tag
+  function filterByTag(tag) {
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+	  const tagContainer = card.querySelector('.post-tags');
+	  const tags = tagContainer?.dataset.tags?.split(',').filter(Boolean) || [];
+	  console.log(tags);
+      const matches = !tag || tag === 'all' || tags.includes(tag);
+      
+      if (matches) {
+        card.style.display = '';      // Show the card
+        visibleCount++;
+      } else {
+        card.style.display = 'none';  // Hide the card
+      }
+    });
+
+    // Show/hide the "no matches" message
+    if (noMatches) {
+      noMatches.classList.toggle('hidden', visibleCount > 0);
+    }
+  }
+
+  // Get the 'tag' parameter from the current URL
+  function getTagFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('tag') || 'all';
+  }
+
+  // Update the URL without reloading the page
+  function updateURL(tag) {
+    const url = new URL(window.location);
+    if (tag && tag !== 'all') {
+      url.searchParams.set('tag', tag);
+    } else {
+      url.searchParams.delete('tag');
+    }
+    history.pushState({}, '', url);
+    filterByTag(tag);
+  }
+
+  // Initial filter on page load
+  const initialTag = getTagFromURL();
+  filterByTag(initialTag);
+
+  // Event delegation for tag clicks
+  document.addEventListener('click', (event) => {
+    const tagLink = event.target.closest('.tag-link');
+    if (tagLink) {
+      event.preventDefault();
+	  console.log("you clicked a tag", tagLink.dataset.tag);
+      const tag = tagLink.dataset.tag || 'all';
+      updateURL(tag);
+    }
+  });
+
+  // Handle back/forward buttons
+  window.addEventListener('popstate', () => {
+    filterByTag(getTagFromURL());
+  });
+</script>
 
 <style>
   /* ── Page structure ─────────────────────────────────────────────────────── */
@@ -60,6 +138,7 @@ const projects = (await getCollection('projects')) as Post[];
   /* ── Projects container ─────────────────────────────────────────────────── */
   .projects a {
     text-decoration: none;
+    display: flex;
   }
 
   /* Category sections */

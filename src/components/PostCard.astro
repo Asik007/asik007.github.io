@@ -21,6 +21,8 @@ const { postObject } = Astro.props;
 const { data, id, url } = postObject;
 const { title, description, heroImage: thumbnail, tags = [], date: rawDate } = data;
 
+
+
 // Safe date parsing
 const date = rawDate ? new Date(rawDate instanceof Date ? rawDate : rawDate) : null;
 const formattedDate = date?.toLocaleDateString('en-US', {
@@ -28,9 +30,11 @@ const formattedDate = date?.toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
 }) ?? null;
+
+
 ---
 
-<a href={`/projects/${id}/`} class="cv-card hover-scale-105">
+<a href={`/projects/${id}/`} class="cv-card hover-scale-105" style="display: block;">
   {thumbnail && (
     <div class="card-thumbnail">
       <Image src={thumbnail} alt={title} />
@@ -45,11 +49,11 @@ const formattedDate = date?.toLocaleDateString('en-US', {
   </div>
   
   {tags.length > 0 && (
-    <div class="post-tags">
+    <div class="post-tags" data-tags={tags.join(',')}>
       {tags.map((tag, index) => (
         <>
           {index > 0 && <span class="tag-separator"> · </span>}
-          <span class="tag-link" onclick="">{tag}</span> /* on click send tag to parent page for processing */
+          <span class="tag-link" onclick="">{tag}</span>
         </>
       ))}
     </div>

@@ -1,0 +1,50 @@
+---
+interface Post {
+  data: {
+    title: string;
+    description?: string;
+    heroImage?: string;
+    date?: Date | string;
+    tags?: string[];
+  };
+  id: string;
+  url: string;
+}
+
+type Props = {
+  Posts: Post;
+};
+
+const { Posts } = Astro.props;
+const tagList = ['all', ...new Set(Posts.flatMap(Post => Post.data.tags ?? []))]
+
+console.log(tagList)
+---
+
+{tagList.length > 0 && (
+    <nav
+        class="hidden md:block shrink sticky top-20 max-h-[calc(100vh-100px)] overflow-y-auto"
+        style="
+        color: var(--color-secondary);
+        "
+        aria-label="CV sections"
+    >
+        <ul class="list-none p-1 m-0 shrink">
+        {tagList.map((tag) => (
+            <li class="border-r-2 border-transparent transition-ease-in-out 
+                hover:scale-105 hover:-translate-x-0.5 hover:border-r-(--color-border) text-right pr-2">
+            <a
+                class="tag-link py-1 text-sm p-1 font-mono whitespace-nowrap inline-block max-w-[200px] overflow-clip text-ellipsis"
+                style="
+                color: var(--color-secondary);
+                background-color: var(--color-primary);                
+                "
+                data-tag={tag}
+            >
+                {tag}
+            </a>
+            </li>
+        ))}
+        </ul>
+    </nav>
+)}
