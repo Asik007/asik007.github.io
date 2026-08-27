@@ -70,8 +70,9 @@ if (format === 'rendercv' && rc) {
     <div class="cv-card">
       <div class="grid grid-cols-3">
         {/* Title - spans columns 1-2 */}
-        <h3 class="card-title font-weight-medium w-auto col-span-2">Contact Information</h3>
-        
+        <div class="col-span-2">
+        <h3 class="card-title font-weight-medium w-auto border-l-2 pl-2 border-(--color-border)" >Contact Information</h3>
+        </div>
         {/* Image - column 3, rows 1-X */}
         <div class="relative row-span-4 aspect-square">
           <Image
@@ -111,8 +112,8 @@ if (format === 'rendercv' && rc) {
             <>
               <a class="anchor" id="summary" />
               <div class="cv-card">
-                <h3 class="card-title font-weight-medium">Professional Summary</h3>
-                <p class="card-text font-light text-sm">{rc.summary}</p>
+                <h3 class="card-title font-weight-medium w-auto border-l-2 pl-2 border-(--color-border)">Professional Summary</h3>
+                <p class="card-text font-light text-sm mt-2">{rc.summary}</p>
               </div>
             </>
           )}
