@@ -49,7 +49,7 @@ const formattedDate = date?.toLocaleDateString('en-US', {
       {tags.map((tag, index) => (
         <>
           {index > 0 && <span class="tag-separator"> · </span>}
-          <a href={`/tags/${tag}`} class="tag-link" onclick="event.stopPropagation()">{tag}</a>
+          <span href={`/tags/${tag}`} class="tag-link">{tag}</span>
         </>
       ))}
     </div>
