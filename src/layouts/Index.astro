@@ -1,6 +1,148 @@
-<!-- Astro Layout for Index Pages -->
+---
+import Page from './Basic.astro';
+import TagContent from '../components/TagContent.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionKey } from 'astro:content';
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
 
+interface Props {
+  collection: CollectionKey;   // 'projects', 'posts', etc.
+  siteTitle: string;           // used for <title>/meta via Page
+  pageTitle: string;           // the <h1>
+  pageDescription: string;
+  emptyMessage?: string;
+  showTagFilter?: boolean;
+  card?: AstroComponentFactory; // defaults to PostCard
+}
 
+const {
+  collection,
+  siteTitle,
+  pageTitle,
+  pageDescription,
+  emptyMessage = `No ${pageTitle.toLowerCase()} yet.`,
+  showTagFilter = true,
+  card: Card = PostCard,
+} = Astro.props;
+
+const items = await getCollection(collection);
 ---
 
----
+<Page site_title={siteTitle} description={pageDescription}>
+  <div class="post">
+    <header class="post-header">
+      <h1 class="post-title">{pageTitle}</h1>
+      <p class="post-description">{pageDescription}</p>
+    </header>
+
+    <article class="flex gap-4">
+      {showTagFilter && <TagContent Posts={items} />}
+      <div class="projects m-2">
+        <p
+          id="no-projects"
+          class:list={['no-projects', { hidden: items.length > 0 }]}
+        >
+          {emptyMessage}
+        </p>
+        {items.length > 0 && (
+          <div class="projects-grid" id="projects-grid">
+            {items.map((item) => (
+              <Card postObject={item} />
+            ))}
+          </div>
+        )}
+      </div>
+    </article>
+  </div>
+</Page>
+
+<script>
+  const cards = document.querySelectorAll<HTMLElement>('.cv-card');
+  const noMatches = document.getElementById('no-projects');
+
+  function filterByTag(tag: string) {
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const tagContainer = card.querySelector<HTMLElement>('.post-tags');
+      const tags = tagContainer?.dataset.tags?.split(',').filter(Boolean) ?? [];
+      const matches = !tag || tag === 'all' || tags.includes(tag);
+
+      card.style.display = matches ? '' : 'none';
+      if (matches) visibleCount++;
+    });
+
+    noMatches?.classList.toggle('hidden', visibleCount > 0);
+  }
+
+  function getTagFromURL(): string {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('tag') || 'all';
+  }
+
+  function updateURL(tag: string) {
+    const url = new URL(window.location.href);
+    if (tag && tag !== 'all') {
+      url.searchParams.set('tag', tag);
+    } else {
+      url.searchParams.delete('tag');
+    }
+    history.pushState({}, '', url);
+    filterByTag(tag);
+  }
+
+  filterByTag(getTagFromURL());
+
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    const tagLink = target.closest<HTMLElement>('.tag-link');
+    if (tagLink) {
+      event.preventDefault();
+      updateURL(tagLink.dataset.tag || 'all');
+    }
+  });
+
+  window.addEventListener('popstate', () => {
+    filterByTag(getTagFromURL());
+  });
+</script>
+
+<style>
+  .post {
+    padding-top: 0;
+  }
+
+  .post-description {
+    color: var(--global-text-color-light);
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .no-projects {
+    color: var(--global-text-color-light);
+    font-size: 1rem;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .projects a {
+    text-decoration: none;
+    display: flex;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
