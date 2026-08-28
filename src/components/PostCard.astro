@@ -22,9 +22,6 @@ const { data, id, url } = postObject;
 
 const { title, description, heroImage: thumbnail, tags = [], pubDate: rawDate } = data;
 
-
-
-
 // Safe date parsing
 const date = rawDate ? new Date(rawDate instanceof Date ? rawDate : rawDate) : null;
 console.log("date", date)

@@ -18,7 +18,7 @@ type Props = {
 const { Posts } = Astro.props;
 const tagList = ['all', ...new Set(Posts.flatMap(Post => Post.data.tags ?? []))]
 
-console.log(tagList)
+// console.log(tagList)
 ---
 
 {tagList.length > 0 && (
