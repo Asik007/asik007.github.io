@@ -13,7 +13,6 @@ interface Props {
   pageDescription: string;
   emptyMessage?: string;
   showTagFilter?: boolean;
-  card?: AstroComponentFactory; // defaults to PostCard
 }
 
 const {
@@ -23,8 +22,9 @@ const {
   pageDescription,
   emptyMessage = `No ${pageTitle.toLowerCase()} yet.`,
   showTagFilter = true,
-  card: Card = PostCard,
 } = Astro.props;
+
+console
 
 const items = await getCollection(collection);
 ---
@@ -48,7 +48,7 @@ const items = await getCollection(collection);
         {items.length > 0 && (
           <div class="projects-grid gap-x-6">
             {items.map((item) => (
-              <Card postObject={item} />
+              <PostCard postObject={item} />
             ))}
           </div>
         )}

@@ -6,7 +6,7 @@ interface Post {
     title: string;
     description?: string;
     heroImage?: string;
-    date?: Date | string;
+    pubDate?: Date | string;
     tags?: string[];
   };
   id: string;
@@ -19,12 +19,16 @@ type Props = {
 
 const { postObject } = Astro.props;
 const { data, id, url } = postObject;
-const { title, description, heroImage: thumbnail, tags = [], date: rawDate } = data;
+
+const { title, description, heroImage: thumbnail, tags = [], pubDate: rawDate } = data;
+
 
 
 
 // Safe date parsing
 const date = rawDate ? new Date(rawDate instanceof Date ? rawDate : rawDate) : null;
+console.log("date", date)
+
 const formattedDate = date?.toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
