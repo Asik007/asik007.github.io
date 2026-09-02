@@ -1,18 +1,18 @@
 ---
 interface Post {
-  data: {
-    title: string;
-    description?: string;
-    heroImage?: string;
-    date?: Date | string;
-    tags?: string[];
-  };
-  id: string;
-  url: string;
+    data: {
+        title: string;
+        description?: string;
+        heroImage?: string;
+        date?: Date | string;
+        tags?: string[];
+    };
+    id: string;
+    url: string;
 }
 
 type Props = {
-  Posts: Post;
+    Posts: Post[];
 };
 
 const { Posts } = Astro.props;
@@ -20,6 +20,8 @@ const tagList = ['all', ...new Set(Posts.flatMap(Post => Post.data.tags ?? []))]
 
 // console.log(tagList)
 ---
+
+<!-- TODO: Add a way to filter based on multiple tags -->
 
 {tagList.length > 0 && (
     <nav
@@ -31,13 +33,13 @@ const tagList = ['all', ...new Set(Posts.flatMap(Post => Post.data.tags ?? []))]
     >
         <ul class="list-none p-1 m-0 shrink">
         {tagList.map((tag) => (
-            <li class="border-r-2 border-transparent transition-ease-in-out 
+            <li class="border-r-2 border-transparent transition-ease-in-out
                 hover:scale-105 hover:-translate-x-0.5 hover:border-r-(--color-border) text-right pr-2">
             <a
                 class="tag-link py-1 text-sm p-1 font-mono whitespace-nowrap inline-block max-w-[200px] overflow-clip text-ellipsis"
                 style="
                 color: var(--color-secondary);
-                background-color: var(--color-primary);                
+                background-color: var(--color-primary);
                 "
                 data-tag={tag}
             >

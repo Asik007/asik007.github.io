@@ -4,7 +4,6 @@ import TagContent from '../components/TagContent.astro';
 import PostCard from '../components/PostCard.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionKey } from 'astro:content';
-import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
 
 interface Props {
   collection: CollectionKey;   // 'projects', 'posts', etc.
