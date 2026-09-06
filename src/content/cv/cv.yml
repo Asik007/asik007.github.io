@@ -1,25 +1,18 @@
 cv:
   name: Advik Sikligar
-  headline:
+  # headline:
   location: Chicago, IL
   email: adviksikligar@gmail.com
-  photo:
-  phone:
+  # photo:
+  # phone: tel:+1-000-000-0000
   website: http://asik007.github.io
   social_networks:
     - network: LinkedIn
       username: advik-sikligar
     - network: GitHub
       username: asik007
-  custom_connections:
+  # custom_connections:
   sections:
-    Welcome to RenderCV:
-      - RenderCV reads a CV written in a YAML file, and generates a PDF with
-        professional typography.
-      - Each section title is arbitrary.
-      - You can choose any of the 9 entry types for each section.
-      - Markdown syntax is supported everywhere. This is **bold**, *italic*, and
-        [link](https://example.com).
     education:
       - institution: University of Illinois Chicago
         area: Biomedical Engineering
@@ -50,7 +43,7 @@ cv:
         location: Chicago, IL
         summary:
         highlights:
-          - Worked with 30 students to understand CAD and Arduino
+          - Worked with 30 students to help guide them through CAD and Arduino
       - company: Engineering Design Team @ UIC
         position: President
         date:

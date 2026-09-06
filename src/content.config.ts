@@ -35,66 +35,49 @@ const projects = defineCollection({
 });
 
 // ------------------- Zod Schemas (runtime validation & type inference) -------------------
+// src/content/config.ts
+// ---------- Helper schemas ----------
 
-const RenderCVEntrySchema = z.object({
-  institution: z.string().optional(),
-  company: z.string().optional(),
-  position: z.string().optional(),
-  area: z.string().optional(),
-  degree: z.string().optional(),
-  title: z.string().optional(),
-  authors: z.array(z.string()).optional(),
-  doi: z.string().optional(),
-  date: z.union([z.string(), z.number()]).optional(),
-  start_date: z.union([z.string(), z.number()]).optional(),
-  end_date: z.union([z.string(), z.number(), z.literal('present')]).optional(),
+// An entry can be a simple string or an object with any keys.
+const SectionEntrySchema = z.union([
+  z.string(),
+  z.object({}).catchall(z.any()), // accepts any object
+]);
+
+// The 'cv' object – we validate the core fields, but sections are flexible.
+const CvSchema = z.object({
+  name: z.string(),
+  headline: z.string().optional(),
   location: z.string().optional(),
-  journal: z.string().optional(),
-  publisher: z.string().optional(),
-  url: z.string().optional(),
-  highlights: z.array(z.string()).optional(),
-  name: z.string().optional(),
-  issuer: z.string().optional(),
-  label: z.string().optional(),
-  details: z.string().optional(),
+  email: z.string().optional(), // can be string or array, but we keep simple
+  photo: z.string().optional(),
+  phone: z.string().optional(),
+  website: z.string().optional(),
+  social_networks: z
+    .array(
+      z.object({
+        network: z.string(),
+        username: z.string(),
+      })
+    )
+    .optional(),
+  custom_connections: z.array(z.any()).optional(),
+  sections: z.record(z.array(SectionEntrySchema)).optional(),
 });
 
-const RenderCVSchema = z.object({
-  cv: z.object({
-    name: z.string(),
-    location: z.string().optional(),
-    email: z.string().optional(),
-    phone: z.string().optional(),
-    website: z.string().optional(),
-    summary: z.string().optional(),
-    social_networks: z
-      .array(
-        z.object({
-          network: z.string(),
-          username: z.string(),
-        })
-      )
-      .optional(),
-    sections: z
-      .object({
-        education: z.array(RenderCVEntrySchema).optional(),
-        experience: z.array(RenderCVEntrySchema).optional(),
-        publications: z.array(RenderCVEntrySchema).optional(),
-        awards: z.array(RenderCVEntrySchema).optional(),
-        skills: z.array(RenderCVEntrySchema).optional(),
-        languages: z.array(RenderCVEntrySchema).optional(),
-        interests: z.array(RenderCVEntrySchema).optional(),
-      })
-      // Allow any additional section keys (e.g., "volunteer", "certificates")
-      .catchall(z.array(RenderCVEntrySchema)),
-  }),
+// Root schema – matches the YAML exactly
+const FullRenderCVSchema = z.object({
+  cv: CvSchema,
+  design: z.any().optional(),          // complex; keep flexible
+  locale: z.any().optional(),
+  settings: z.any().optional(),
 });
 
 // ------------------- Collection Definition -------------------
 
 const cv = defineCollection({
   loader: file("src/content/cv/cv.yml"),
-  schema: RenderCVSchema.shape.cv, // merges { cv: { ... } } into this object
+  schema: FullRenderCVSchema.shape.cv, // merges { cv: { ... } } into this object
 });
 
 
