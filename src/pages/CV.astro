@@ -122,13 +122,13 @@ if (format === 'rendercv' && rc) {
             <CVSection title="Education" id="education">
               <div class="card-body">
                   <ul class="card-text font-light list-group list-group-flush">
-                    {experience.map((e, index) => (
+                    {education.map((e, index) => (
                       <div key={e.id}>
                         {index > 0 && (<hr class="divider" />)}
                         <CVEntry
                           key={e.id}
-                          title={e.position ?? ''}
-                          subtitle={e.company}
+                          title={e.institution + ` — ${e.degree}` ?? ''}
+                          subtitle={e.area}
                           location={e.location}
                           dates={formatDateRange(e.start_date, e.end_date)}
                           highlights={e.highlights}
@@ -200,10 +200,10 @@ if (format === 'rendercv' && rc) {
 
           {skills.length > 0 && (
             <CVSection title="Skills" id="skills">
-              <div class="card-text font-light">
+              <div class="card-text font-light p-1">
                 {skills.map((e) => (
-                  <div class="skill-item text-md" key={e.id}>
-                    <strong>{e.label}:</strong> {e.details}
+                  <div class="header" key={e.id}>
+                    <b>{e.label}:</b> {e.details}
                   </div>
                 ))}
               </div>
@@ -251,3 +251,13 @@ if (format === 'rendercv' && rc) {
                     </tr>
                   )} */}      </a>
 </Page>
+
+<style>
+    .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+</style>

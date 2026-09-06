@@ -9,6 +9,22 @@ interface Props {
 }
 
 const { title, subtitle, location, dates, highlights = [], url } = Astro.props;
+
+// 2. Helper function (kept outside or inside – it's fine here)
+function basicMarkdown(text: string): string {
+  const escaped = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  let html = escaped.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<b>$1</b>');
+  html = html.replace(/_(.+?)_/g, '<b>$1</b>');
+  return html;
+}
+
+// 3. Compute derived values from the destructured props
+const renderedSubtitle = subtitle ? basicMarkdown(subtitle) : '';
+const renderedHighlights = highlights.map(h => basicMarkdown(h));
 ---
 
 
@@ -32,9 +48,9 @@ const { title, subtitle, location, dates, highlights = [], url } = Astro.props;
     </div>
 
     {/* Subtitle + Location */}
-    {(subtitle || location) && (
+    {(renderedSubtitle || location) && (
       <div class="meta">
-        {subtitle && <p>{subtitle}</p>}
+        {subtitle && <p set:html={renderedSubtitle}></p>}
         {location && <p class="location">{location}</p>}
       </div>
     )}
@@ -42,7 +58,7 @@ const { title, subtitle, location, dates, highlights = [], url } = Astro.props;
     {/* Highlights */}
     {highlights.length > 0 && (
       <ul class="highlights">
-        {highlights.map((highlight) => (
+        {renderedHighlights.map((highlight) => (
           <li class="highlight-item">
             <span class="highlight-bullet">•</span>
             <span set:html={highlight} />

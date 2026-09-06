@@ -16,7 +16,7 @@ cv:
     education:
       - institution: University of Illinois Chicago
         area: Biomedical Engineering
-        degree: B.S
+        degree: B.Sc
         date:
         start_date: 2022-09
         end_date: 2026-12
@@ -96,25 +96,37 @@ cv:
           - Giulia De Campo
           - David T Eddington
         summary:
-        doi: 10.1234/neurips.2023.1234
+        doi: 10.1038/s41598-025-16094-2
         url:
         journal: Scientific Reports
         date: 2025-10
+    skills:
+      - label: Languages
+        details: Python, C++, VHDL, MATLAB, SQL, Bash/Shell
+      - label: ML & Data Science
+        details: PyTorch, ONNX, NumPy, Pandas, Scikit-learn, CUDA
+      - label: Simulation & CAD
+        details: SolidWorks, Inventor, Fusion 360
+      - label: DevOps & Tools
+        details: Linux, Git, Docker, Jekyll, Astro.js, LaTeX, CI/CD
+      - label: Hardware & Embedded
+        details: VHDL, FPGA (Vivado, ISE), KiCad, Altium, LTspice
+      - label: Wet Lab & Biology
+        details: Cell Culture (CHO, HepG2), Confocal, Staining
+      - label: Prototyping
+        details: 3D Printing (FDM/SLA), Laser Cutting, Milling, Turning
     awards:
-      - name: BMES Annual Meeting
-        date: 2025-10
-        issuer: Royal Swedish Academy of Sciences
-        highlights:
-          - A Microfluidic Platform for Personalized Immunotherapy Screening
-            with Core-Needle Biopsies
-      - name: Chicago Area Undergraduate Research
-        date: 2025-03
-        highlights: []
-      - name: UIC BME Symposium
-        date: 2023-02
       - name: UIC Engineering Expo
         date: 2026-05
         highlights:
           - Conjuctiva Bulbar Handheld Imaging Device
           - Best in Show (Biomedical Engineering Department)
-      - name: ""
+      - name: BMES Annual Meeting
+        date: 2025-10
+        highlights:
+          - A Microfluidic Platform for Personalized Immunotherapy Screening
+            with Core-Needle Biopsies
+      - name: Chicago Area Undergraduate Research
+        date: 2025-03
+      - name: UIC BME Symposium
+        date: 2023-02
