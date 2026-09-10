@@ -1,129 +1,132 @@
-# RenderCV YAML format — https://docs.rendercv.com/
-# Used by the CV page when site.cv.format is 'rendercv'.
-
 cv:
-  name: Albert Einstein
-  location: Princeton, NJ
-  email: einstein@example.com
-  phone: tel:+1-000-000-0000
-  website: https://example.github.io
-  summary: A German-born theoretical physicist widely regarded as one of the greatest scientists of all time. Best known for developing the theory of relativity, the most important pillar along with quantum mechanics of modern physics.
+  name: Advik Sikligar
+  # headline:
+  location: Chicago, IL
+  email: adviksikligar@gmail.com
+  # photo:
+  # phone: tel:+1-000-000-0000
+  website: http://asik007.github.io
   social_networks:
-    - network: GitHub
-      username: example
     - network: LinkedIn
-      username: example
-
+      username: advik-sikligar
+    - network: GitHub
+      username: asik007
+  # custom_connections:
   sections:
     education:
-      - institution: University of Zurich
-        area: Physics
-        degree: PhD
-        start_date: 1900
-        end_date: 1905
-        highlights:
-          - 'Thesis: "A New Determination of Molecular Dimensions"'
-          - 'Supervisor: Alfred Kleiner'
-
-      - institution: ETH Zurich
-        area: Mathematics and Physics Teaching Diploma
-        degree: Diploma
-        start_date: 1896
-        end_date: 1900
-
+      - institution: University of Illinois Chicago
+        area: Biomedical Engineering
+        degree: B.Sc
+        date:
+        start_date: 2022-09
+        end_date: 2026-12
+        location: Chicago, IL
+        summary:
+        highlights: []
     experience:
-      - company: Institute for Advanced Study
-        position: Professor
-        location: Princeton, NJ
-        start_date: 1933
+      - company: Biological Microsystems Lab
+        position: Research Assistant
+        date:
+        start_date: 2023-04
         end_date: present
+        location: Chicago, IL
+        summary:
         highlights:
-          - Developed unified field theory research program
-          - Mentored generations of physicists and mathematicians
-          - Contributed to foundations of quantum mechanics debates
-
-      - company: University of Berlin
-        position: Professor and Director
-        location: Berlin, Germany
-        start_date: 1914
-        end_date: 1933
+          - weekly group rundowns for current project
+          - helped get a R21 grant
+          - Maintained daily use machines for R&D
+      - company: UIC Department of BME
+        position: Teaching Assistant
+        date:
+        start_date: 2024-08
+        end_date: 2024-12
+        location: Chicago, IL
+        summary:
         highlights:
-          - Developed the general theory of relativity (1915)
-          - Predicted gravitational waves and black holes
-          - Awarded Nobel Prize in Physics (1921)
-
-      - company: University of Zurich
-        position: Associate Professor
-        location: Zurich, Switzerland
-        start_date: 1909
-        end_date: 1911
-
-      - company: Swiss Patent Office
-        position: Technical Expert (Third Class)
-        location: Bern, Switzerland
-        start_date: 1902
-        end_date: 1909
+          - Worked with 30 students to help guide them through CAD and Arduino
+      - company: Engineering Design Team @ UIC
+        position: President
+        date:
+        start_date: 2022-08
+        end_date: 2025-04
+        location: Chicago, IL
+        summary:
         highlights:
-          - Evaluated patent applications while conducting independent research
-          - Published four landmark papers in 1905 (Annus Mirabilis)
-
+          - Helped develop a UAV platform for SUAS
+          - Was Mechanical and Electrical Lead for the SUAS team
+          - As President, communicated between team and  University
+      - company: Engineering World Health
+        position: Treasurer
+        date:
+        start_date: 2023-08
+        end_date: 2025-04
+        location: Chicago, IL
+        summary:
+        highlights:
+          - Organized budget for social events and projects
+          - communicated with advisor on future steps
+    projects:
+      - name: "[Cat'sEye](https://github.com/)"
+        date:
+        start_date: 2023-01
+        end_date: present
+        location:
+        summary: Capstone project to design a bulbar conjuctiva imaging system and
+          computer vision tool for vessel isolation and analysis.
+        highlights: []
+      - name: "[Tapioca](https://github.com/)"
+        date: '2021'
+        start_date:
+        end_date:
+        location:
+        summary: Automated neural network pruning toolkit with differentiable masks
+        highlights:
+          - Reduced model size by 90% with less than 1% accuracy degradation on
+            ImageNet
+          - Featured in PyTorch ecosystem tools, 4,200+ GitHub stars
+      - name: Home Server
+      - name: Kuriboh
+      - name: Personal Website
     publications:
-      - title: 'On the Electrodynamics of Moving Bodies'
+      - title: A systematic investigation of endothelial cell behavior under hydrostatic
+          pressure
         authors:
-          - Albert Einstein
-        doi: 10.1002/andp.19053221004
-        date: 1905-06
-        journal: Annalen der Physik
-
-      - title: 'Does the Inertia of a Body Depend Upon Its Energy Content?'
-        authors:
-          - Albert Einstein
-        doi: 10.1002/andp.19053231314
-        date: 1905-09
-        journal: Annalen der Physik
-
-      - title: 'Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?'
-        authors:
-          - Albert Einstein
-          - Boris Podolsky
-          - Nathan Rosen
-        doi: 10.1103/PhysRev.47.777
-        date: 1935-05
-        journal: Physical Review
-
-      - title: 'On the General Theory of Relativity'
-        authors:
-          - Albert Einstein
-        date: 1915-11
-        journal: Prussian Academy of Sciences
-
-    awards:
-      - name: Nobel Prize in Physics
-        date: '1921'
-        issuer: Royal Swedish Academy of Sciences
-        highlights:
-          - 'For services to theoretical physics, and especially for his discovery of the law of the photoelectric effect'
-
-      - name: Copley Medal
-        date: '1925'
-        issuer: Royal Society
-
-      - name: Max Planck Medal
-        date: '1929'
-        issuer: German Physical Society
-
+          - Giulia Venturini
+          - "*Advik Sikligar*"
+          - Giulia De Campo
+          - David T Eddington
+        summary:
+        doi: 10.1038/s41598-025-16094-2
+        url:
+        journal: Scientific Reports
+        date: 2025-10
     skills:
-      - label: Theoretical Physics
-        details: General Relativity, Special Relativity, Quantum Mechanics, Statistical Mechanics
-      - label: Mathematics
-        details: Differential Geometry, Tensor Calculus, Riemannian Geometry
       - label: Languages
-        details: German (native), English (fluent), French (proficient)
-
-    interests:
-      - label: Music
-        details: Violin, Mozart, Bach
-      - label: Philosophy
-        details: Spinoza, Mach, Kant
-      - label: Sailing
-        details: Long Island Sound, Swiss lakes
+        details: Python, C++, VHDL, MATLAB, SQL, Bash/Shell
+      - label: ML & Data Science
+        details: PyTorch, ONNX, NumPy, Pandas, Scikit-learn, CUDA
+      - label: Simulation & CAD
+        details: SolidWorks, Inventor, Fusion 360
+      - label: DevOps & Tools
+        details: Linux, Git, Docker, Jekyll, Astro.js, LaTeX, CI/CD
+      - label: Hardware & Embedded
+        details: VHDL, FPGA (Vivado, ISE), KiCad, Altium, LTspice
+      - label: Wet Lab & Biology
+        details: Cell Culture (CHO, HepG2), Confocal, Staining
+      - label: Prototyping
+        details: 3D Printing (FDM/SLA), Laser Cutting, Milling, Turning
+    awards:
+      - name: UIC Engineering Expo
+        date: 2026-05
+        highlights:
+          - Conjuctiva Bulbar Handheld Imaging Device
+          - Best in Show (Biomedical Engineering Department)
+      - name: BMES Annual Meeting
+        date: 2025-10
+        highlights:
+          - A Microfluidic Platform for Personalized Immunotherapy Screening
+            with Core-Needle Biopsies
+      - name: Chicago Area Undergraduate Research
+        date: 2025-03
+      - name: UIC BME Symposium
+        date: 2023-02
