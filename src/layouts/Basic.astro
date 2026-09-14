@@ -6,26 +6,45 @@ import TableContent from '../components/TableContent.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 export interface Props {
-  site_title?: string,
-  description?: string,
+  /** Page-specific title, e.g. "About" or "Blog Post: Astro Tips".
+   *  Rendered in the document head as "<page title> | <site title>". */
+  site_title?: string;
+  /** Page-specific meta description. Falls back to the site-wide description. */
+  description?: string;
   bg_color?: string;
   fg_color?: string;
-  tocItems?: { label: string; href: string }[]; // Optional prop for TOC items
-  image?: string; // Optional prop for the image. URL to the image
+  tocItems?: { label: string; href: string }[];
+  /** Social/OG preview image URL. Falls back to the favicon. */
+  image?: string;
 }
 
-const title = Astro.props.site_title || SITE_TITLE
-const desc = Astro.props.description || SITE_DESCRIPTION
+const {
+  site_title: pageTitle,
+  description,
+  bg_color,
+  fg_color,
+  tocItems,
+  image,
+} = Astro.props;
 
-// const metaImage = Astro.props.image; // Default to favicon if no image is provided
+// Build a descriptive <title>:
+//   - page title provided  -> "Page Title | Site Title"
+//   - no page title        -> "Site Title"
+//   - page title already contains the site title -> use it as-is (no duplication)
+const documentTitle = pageTitle
+  ? pageTitle.includes(SITE_TITLE)
+    ? pageTitle
+    : `${pageTitle} | ${SITE_TITLE}`
+  : SITE_TITLE;
 
-const { bg_color, fg_color, tocItems, image } = Astro.props;
+// Prefer the page's own description, otherwise fall back to the site default.
+const metaDescription = description || SITE_DESCRIPTION;
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <BaseHead title={title} description={SITE_DESCRIPTION} headerImage={image} />
+        <BaseHead title={documentTitle} description={metaDescription} headerImage={image} />
     </head>
     <body style={`background-color: ${bg_color || 'var(--color-primary)'};`}>
         <Header />
