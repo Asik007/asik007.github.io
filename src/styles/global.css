@@ -1,219 +1,179 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
 @import "tailwindcss";
 
-:root {
-  color-scheme: light dark;
+@theme {
+  /* Palette */
+  --color-jet-black: #001f24;
+  --color-cream-light: #fae0c1;
+  --color-cream: #ffdcb2;
+  --color-chestnut: #9d3723;
+  --color-cerulean: #287c8f;
+  --color-spruce: #2e3526;
+  --color-evergreen: #00210d;
+  --color-teal: #8ba492;
+  --color-brown: #3d000a;
+  --color-jet: #0e2b3a;
+  --color-gray-light: #e5e7eb;
 
-	/* --color-jet: #0E2B3A;
-	--color-cream: #EECC94;
-	--color-chestnut: #9D3723;
-	--color-cerulean: #287C8F;
-	--color-spruce: #374329; */
+  /* Typography */
+  --font-atkinson: "Atkinson Hyperlegible", sans-serif;
 
-	--color-jet-black: #001f24;
-	--color-cream-light: #fae0c1;
-	--color-cream: #ffdcb2;
-	--color-chestnut: #9D3723;
-	--color-cerulean: #287C8F;
-	--color-spruce: #2e3526;
-	--color-evergreen: #00210D;
-	--color-teal: #8ba492;
-	--color-brown: #3d000a
-
-
-  /* Semantic Tokens - light mode (default) */
-  --color-primary: var(--color-cream);
-  --color-secondary: var(--color-jet);
-  --color-text: var(--color-jet);
-  --color-background: var(--color-cream-light);
-  --color-text-subtle: var(--color-jet);
-  --color-accent: var(--color-spruce);
-  --color-border: var(--color-chestnut);
-  --var-color-filter: invert(100%);
-
-
+  /* Semantic tokens mapped to intermediate standard CSS variables */
+  --color-primary: var(--theme-primary);
+  --color-secondary: var(--theme-secondary);
+  --color-text: var(--theme-text);
+  --color-background: var(--theme-background);
+  --color-text-subtle: var(--theme-text-subtle);
+  --color-accent: var(--theme-accent);
+  --color-border: var(--theme-border);
 }
 
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
+@layer base {
+  /* Default System Light Mode */
   :root {
-	/* main background color */
-    --color-primary: var(--color-jet-black);
-	/* secondary accent color  */
-    --color-secondary: var(--color-cream);
-    --color-background: var(--color-brown);
-    --color-text: var(--color-cream);
-    --color-text-subtle: var(--palette-jet-400);
-    --color-accent: var(--palette-chestnut-400);
-    --color-border: var(--color-chestnut);
+    --theme-primary: var(--color-cream);
+    --theme-secondary: var(--color-jet);
+    --theme-text: var(--color-jet);
+    --theme-background: var(--color-cream-light);
+    --theme-text-subtle: var(--color-jet);
+    --theme-accent: var(--color-spruce);
+    --theme-border: var(--color-chestnut);
+  }
+
+  /* System Dark Mode */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --theme-primary: var(--color-jet-black);
+      --theme-secondary: var(--color-cream);
+      --theme-text: var(--color-cream);
+      --theme-background: var(--color-brown);
+      --theme-text-subtle: var(--color-jet);
+      --theme-accent: var(--color-chestnut);
+      --theme-border: var(--color-chestnut);
+    }
+  }
+
+  /* Manual theme overrides */
+  [data-theme="dark"] {
+    color-scheme: dark;
+    --theme-primary: #0e2b3a;
+    --theme-secondary: #eecc94;
+    --theme-text: #eecc94;
+    --theme-background: #0f1219;
+    --theme-text-subtle: #8ba492;
+    --theme-accent: #9d3723;
+    --theme-border: #9d3723;
+  }
+
+  [data-theme="light"] {
+    color-scheme: light;
+    --theme-primary: #eecc94;
+    --theme-secondary: #0e2b3a;
+    --theme-text: #0e2b3a;
+    --theme-background: #ffffff;
+    --theme-text-subtle: #0e2b3a;
+    --theme-accent: #2e3526;
+    --theme-border: #9d3723;
+  }
+
+  html {
+    color-scheme: light dark;
+  }
+
+  body {
+    @apply m-0 p-0 text-left bg-primary text-text text-[20px] leading-[1.7] break-words;
+    font-family: var(--font-atkinson);
+  }
+
+  main {
+    @apply w-[66%] max-w-[calc(100%-2em)] mx-auto px-[1em] py-0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply mt-[0.5rem] mb-0 mx-0 leading-[1.2] text-secondary;
+  }
+
+  h1 { @apply text-[3.052em]; }
+  h2 { @apply text-[2.441em]; }
+  h3 { @apply text-[1.953em]; }
+  h4 { @apply text-[1.563em]; }
+  h5 { @apply text-[1.25em]; }
+
+  strong,
+  b {
+    @apply font-bold;
+  }
+
+  a {
+    @apply text-secondary;
+  }
+
+  .prose p {
+    @apply mb-[2em];
+  }
+
+  textarea,
+  input {
+    @apply text-[16px];
+  }
+
+  textarea {
+    @apply w-full;
+  }
+
+  table {
+    @apply w-auto;
+  }
+
+  img {
+    @apply max-w-full h-auto;
+  }
+
+  code {
+    @apply px-[5px] py-[2px] rounded-[4px] bg-jet-black text-cream-light text-[0.9em] font-mono;
+  }
+
+  pre {
+    @apply p-[1.5em] rounded-lg;
+  }
+
+  pre > code {
+    all: unset;
+  }
+
+  blockquote {
+    @apply border-l-4 border-accent pl-[20px] m-0 text-[1.333em];
+  }
+
+  hr {
+    @apply border-t border-gray-light;
+  }
+
+  @media (max-width: 720px) {
+    body {
+      @apply text-[18px];
+    }
+
+    main {
+      @apply p-[1em];
+    }
   }
 }
 
-/* Manual dark mode class (for toggle buttons) */
-[data-theme="dark"] {
-    --color-primary: #0E2B3A;
-    --color-secondary: #EECC94;
-    --background: #0f1219;
-}
+@layer components {
+  .divider {
+    @apply border-t-[3px] border-border mx-auto w-1/2;
+  }
 
-[data-theme="light"] {
-  --color-primary: #EECC94;
-  --color-secondary: #0E2B3A;
-  --background: #fff;
-}
+  .cv-content {
+    @apply bg-primary text-secondary;
+  }
 
-
-body {
-	font-family: var(--font-atkinson);
-	margin: 0;
-	padding: 0;
-	text-align: left;
-	background: var(--color-primary);
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: var(--color-text);
-	font-size: 20px;
-	line-height: 1.7;
+  .cv-card {
+    @apply mt-[0.75rem] mb-[0.75rem] p-[0.75rem] border border-secondary rounded-[0.375rem] shadow-sm;
+  }
 }
-main {
-	width: 66%;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 0em 1em;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: .5rem 0 0 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-}
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
-	font-weight: 700;
-}
-a {
-	color: var(--accent);
-}
-a:hover {
-	color: var(--accent);
-}
-p {
-	/* margin-bottom: 1em; */
-}
-.prose p {
-	margin-bottom: 2em;
-}
-textarea {
-	width: 100%;
-	font-size: 16px;
-}
-input {
-	font-size: 16px;
-}
-table {
-	width: auto;
-}
-img {
-	max-width: 100%;
-	height: auto;
-	/* border-radius: 8px; */
-}
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
-}
-
-
-
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-}
-pre > code {
-	all: unset;
-}
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0;
-	font-size: 1.333em;
-}
-hr {
-	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
-}
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
-	main {
-		padding: 1em;
-	}
-}
-
-.sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
-	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
-	white-space: nowrap;
-}
-
-
-.divider {
-	border: 0; 
-	border-top: 3px solid var(--color-border); 
-	margin: 0 auto; 
-	width: 50%;
-}
-
-.cv-content {
-  background-color: var(--color-primary);
-  color: var(--color-secondary);
-}
-
-.cv-card {
-  margin-top: 0.75rem;
-  margin-bottom: .75rem;
-  padding: 0.75rem;
-  border: 1px solid var(--color-secondary);
-  border-radius: 0.375rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-
