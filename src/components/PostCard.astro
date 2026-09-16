@@ -41,11 +41,11 @@ const formattedDate = date?.toLocaleDateString('en-US', {
     </div>
   )}
   
-  <div class="post-link">
-    <h3 class="card-title font-weight-medium border-l-2 pl-2 border-(--color-border)">
+  <div class="post-link border-l-2 border-(--color-accent)">
+    <h3 class="card-title font-weight-medium  pl-2 ">
       {title}
     </h3>
-    {formattedDate && <time class="post-date">{formattedDate}</time>}
+    {formattedDate && <time class="post-date pl-2">{formattedDate}</time>}
   </div>
   
   {tags.length > 0 && (

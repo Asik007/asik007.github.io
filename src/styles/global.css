@@ -166,7 +166,7 @@
 
 @layer components {
   .divider {
-    @apply border-t-[3px] border-border mx-auto w-1/2;
+    @apply border-t-[3px] border-accent mx-auto w-1/2;
   }
 
   .cv-content {

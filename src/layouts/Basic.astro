@@ -46,46 +46,16 @@ const metaDescription = description || SITE_DESCRIPTION;
     <head>
         <BaseHead title={documentTitle} description={metaDescription} headerImage={image} />
     </head>
-    <body style={`background-color: ${bg_color || 'var(--color-primary)'};`}>
+    <body style={bg_color ? `background-color: ${bg_color};` : undefined} class="bg-primary">
         <Header />
 
-        <main class="main-content" style={`color: ${fg_color || 'var(--color-secondary)'}; `}>
+        <main
+            class="min-w-0 box-border px-4 mx-auto max-xl:justify-self-stretch text-secondary" 
+            style={fg_color ? `color: ${fg_color};` : undefined}
+        >
             <slot />
         </main>
 
         <Footer />
     </body>
 </html>
-
-<style>
-
-
-
-    .main-content {
-        /* flex: 1;                 takes the remaining space */
-        min-width: 0;            /* prevent overflow */
-        box-sizing: border-box;
-        padding: 0 1rem;
-        margin: 0 auto;
-    }
-
-    /* On smaller screens: stack ToC above content */
-    @media (max-width: 1200px) {
-        .page-wrapper {
-            grid-template-columns: 1fr;   /* single column */
-            gap: 2rem 0;                  /* vertical gap between stacked items */
-            justify-items: center;        /* center the items horizontally (optional) */
-        }
-
-        .toc-sidebar {
-            position: static;             /* no longer sticky */
-            text-align: center;           /* optional */
-            max-width: 100%;             /* allow full width */
-            justify-self: stretch;        /* make it take full width if you want */
-        }
-
-        .main-content {
-            justify-self: stretch;        /* takes full width */
-        }
-    }
-</style>
