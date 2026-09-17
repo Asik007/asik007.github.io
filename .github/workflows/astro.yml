@@ -89,6 +89,11 @@ jobs:
             --site "${{ steps.pages.outputs.origin }}" \
             --base "${{ steps.pages.outputs.base_path }}"
         working-directory: ${{ env.BUILD_PATH }}
+      - name: Upload dist folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: astro-dist-folder
+          path: dist/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
