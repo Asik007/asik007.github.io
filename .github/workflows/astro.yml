@@ -60,6 +60,7 @@ jobs:
           node-version: "26.7.0"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
           cache-dependency-path: ${{ env.BUILD_PATH }}/${{ steps.detect-package-manager.outputs.lockfile }}
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -72,7 +73,6 @@ jobs:
 
       - name: Render CV to PDF & Prepare Pages Directory
         run: |
-          mkdir -p ${{ env.OUTPUT_DIR }}
           # Render CV directly into the output directory
           rendercv render ${{ env.CV_PATH }} -nomd -nohtml -nopng --pdf-path ${{ env.OUTPUT_DIR }}/src/content/cv.pdf
 
