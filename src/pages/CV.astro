@@ -71,7 +71,7 @@ if (format === 'rendercv' && rc) {
       <div class="grid grid-cols-3">
         {/* Title - spans columns 1-2 */}
         <div class="col-span-2">
-        <h3 class="card-title font-weight-medium w-auto border-l-2 pl-2 border-(--color-border)" >Contact Information</h3>
+        <h3 class="card-title font-weight-medium w-auto border-l-2 pl-2" >Contact Information</h3>
         </div>
         {/* Image - column 3, rows 1-X */}
         <div class="relative row-span-4 aspect-square">
@@ -227,7 +227,7 @@ if (format === 'rendercv' && rc) {
       <!-- Floating button: placed here, outside the wrapper -->
       <a
         
-        href={CV_PDF_PATH}
+        href="/{CV_PDF_PATH}"
         target="_blank"
         rel="noopener noreferrer"
         class="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 px-4 py-3 rounded-full shadow-lg transition-shadow ease-in-out hover:ring-2 hover:ring-(--color-border)" 

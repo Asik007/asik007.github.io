@@ -150,7 +150,7 @@
   }
 
   hr {
-    @apply border-t border-gray-light;
+    @apply border-t border-accent;
   }
 
   @media (max-width: 720px) {
