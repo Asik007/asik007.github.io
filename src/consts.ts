@@ -18,4 +18,4 @@ export const GITHUB_PROFILE_URL = 'https://github.com/asik007';
 export const SCHOLAR_URL = 'https://scholar.google.com/citations?user=5g0k6xEAAAAJ&hl=en';
 export const SITE_REPO_URL = 'https://github.com/asik007/asik007.github.io';
 
-export const CV_PDF_PATH = '\public\cv.pdf';
+export const CV_PDF_PATH = '\cv.pdf';
