@@ -4,9 +4,9 @@ name: Render CV to PDF
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
   workflow_dispatch:
 
 
@@ -45,7 +45,6 @@ jobs:
       # Install the dependencies
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
           pip install "rendercv[full]"
 
       # Run the python script to render the cv to pdf
