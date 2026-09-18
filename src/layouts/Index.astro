@@ -23,9 +23,18 @@ const {
   showTagFilter = true,
 } = Astro.props;
 
-console
 
-const items = await getCollection(collection);
+const raw_items = await getCollection(collection);
+// Newest to oldest, putting items without valid dates at the very bottom
+const items = raw_items.sort((a, b) => {
+  // Use Unix Epoch (0 / Jan 1 1970) as the ultimate bottom-of-the-list fallback
+  const dateA = a.data.pubDate ? a.data.pubDate.valueOf() : 0;
+  const dateB = b.data.pubDate ? b.data.pubDate.valueOf() : 0;
+
+  return dateB - dateA;
+});
+
+
 ---
 
 <Page site_title={siteTitle} description={pageDescription}>

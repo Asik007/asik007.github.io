@@ -4,6 +4,25 @@ import Carousel from '../components/Carousel.astro';
 import PostCard from '../components/PostCard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE, GITHUB_PROFILE_URL, LINKED_IN_URL } from '../consts';
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
+const raw_projects = await getCollection('projects');
+const projects = raw_projects.sort((a, b) => {
+  // Use Unix Epoch (0 / Jan 1 1970) as the ultimate bottom-of-the-list fallback
+  const dateA = a.data.pubDate ? a.data.pubDate.valueOf() : 0;
+  const dateB = b.data.pubDate ? b.data.pubDate.valueOf() : 0;
+
+  return dateB - dateA;
+});
+
+const raw_posts = await getCollection('blog');
+const posts = raw_posts.sort((a, b) => {
+  // Use Unix Epoch (0 / Jan 1 1970) as the ultimate bottom-of-the-list fallback
+  const dateA = a.data.pubDate ? a.data.pubDate.valueOf() : 0;
+  const dateB = b.data.pubDate ? b.data.pubDate.valueOf() : 0;
+
+  return dateB - dateA;
+});
 
 ---
 
@@ -27,16 +46,22 @@ import { Image } from 'astro:assets';
 		</div>
 	</div>
 
-	<Carousel title="Recent Projects" description="A few of the recent projects I've been working on." all_link="/blog">
-		<PostCard postObject={{ data: { title: 'Post 1', description: 'Description for Post 1', pubDate: '2024-01-01' }, id: 'post-1', url: '/blog/post-1/' }} />
+  <Carousel title="Recent Projects" description="A few of the recent projects I've been working on." all_link={new URL('/blog', Astro.url)}>
+    {projects.map((item) => (
+      <PostCard postObject={item} />
+    ))}
+		<!-- <PostCard postObject={{ data: { title: 'Post 1', description: 'Description for Post 1', pubDate: '2024-01-01' }, id: 'post-1', url: '/blog/post-1/' }} />
 		<PostCard postObject={{ data: { title: 'Post 2', description: 'Description for Post 2', pubDate: '2024-02-01' }, id: 'post-2', url: '/blog/post-2/' }} />
-		<PostCard postObject={{ data: { title: 'Post 3', description: 'Description for Post 3', pubDate: '2024-03-01' }, id: 'post-3', url: '/blog/post-3/' }} />
+		<PostCard postObject={{ data: { title: 'Post 3', description: 'Description for Post 3', pubDate: '2024-03-01' }, id: 'post-3', url: '/blog/post-3/' }} /> -->
 	</Carousel>
 
 	<Carousel title="Recent posts" description="A few of my most recent blog posts.">
-		<PostCard postObject={{ data: { title: 'Post 1', description: 'Description for Post 1', pubDate: '2024-01-01' }, id: 'post-1', url: '/blog/post-1/' }} />
+    {posts.map((item) => (
+      <PostCard postObject={item} />
+    ))}
+		<!-- <PostCard postObject={{ data: { title: 'Post 1', description: 'Description for Post 1', pubDate: '2024-01-01' }, id: 'post-1', url: '/blog/post-1/' }} />
 		<PostCard postObject={{ data: { title: 'Post 2', description: 'Description for Post 2', pubDate: '2024-02-01' }, id: 'post-2', url: '/blog/post-2/' }} />
-		<PostCard postObject={{ data: { title: 'Post 3', description: 'Description for Post 3', pubDate: '2024-03-01' }, id: 'post-3', url: '/blog/post-3/' }} />
+		<PostCard postObject={{ data: { title: 'Post 3', description: 'Description for Post 3', pubDate: '2024-03-01' }, id: 'post-3', url: '/blog/post-3/' }} /> -->
 	</Carousel>
 
 </Basic>

@@ -11,11 +11,15 @@ interface Post {
   };
   id: string;
   url: string;
+  collection: string;
 }
 
 type Props = {
   postObject: Post;
 };
+
+
+
 
 const { postObject } = Astro.props;
 const { data, id, url } = postObject;
@@ -31,33 +35,39 @@ const formattedDate = date?.toLocaleDateString('en-US', {
   day: 'numeric',
 }) ?? null;
 
-
+console.log('url:', postObject.collection);
 ---
 
-<a href={`/projects/${id}/`} class="cv-card hover-scale-105" style="display: block;">
-  {thumbnail && (
-    <div class="card-thumbnail">
-      <Image src={thumbnail} alt={title} />
+<div class="cv-card hover-scale-105">
+  <a href={`/projects/${id}/`} style="display: block;">
+    {thumbnail && (
+      <div class="card-thumbnail">
+        <Image src={thumbnail} alt={title} />
+      </div>
+    )}
+    <div class="post-link border-l-2 border-(--color-accent)">
+      <h3 class="card-title font-weight-medium pl-2">
+        {title}
+      </h3>
+      {formattedDate && <time class="post-date pl-2">{formattedDate}</time>}
     </div>
-  )}
-  
-  <div class="post-link border-l-2 border-(--color-accent)">
-    <h3 class="card-title font-weight-medium  pl-2 ">
-      {title}
-    </h3>
-    {formattedDate && <time class="post-date pl-2">{formattedDate}</time>}
-  </div>
-  
+  </a>
+
   {tags.length > 0 && (
-    <div class="post-tags" data-tags={tags.join(',')}>
+    <div class="post-tags flex flex-wrap items-center gap-0.5 text-sm pt-2" data-tags={tags.join(',')}>
       {tags.map((tag, index) => (
         <>
           {index > 0 && <span class="tag-separator"> · </span>}
-          <span class="tag-link" onclick="">{tag}</span>
+          <a
+            class="tag-card-link cursor-pointer hover:underline transition-colors"
+            href={`${Astro.url.origin}/${postObject.collection}/?tag=${tag}`}
+          >{tag}</a>
         </>
       ))}
     </div>
   )}
-  
-  {description && <p class="card-text font-light text-sm mt-2">{description}</p>}
-</a>
+
+  <a href={`/projects/${id}/`} style="display: block;">
+    {description && <p class="card-text font-light text-sm mt-2">{description}</p>}
+  </a>
+</div>

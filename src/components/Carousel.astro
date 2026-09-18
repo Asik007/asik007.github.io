@@ -73,25 +73,6 @@ const id = `carousel-${Math.random().toString(36).slice(2, 9)}`;
   </div>
 </div>
 
-<!-- <style>
-  /* Shared button styles kept here since Tailwind's arbitrary-value stacking
-     for this many states gets unreadable inline. Everything below is a 1:1
-     translation of tokens already used elsewhere via @apply. */
-  .carousel-btn {
-    @apply flex-none hidden place-items-center h-9 w-9 rounded-full
-      border border-[var(--theme-border,#9d3723)]
-      bg-[var(--theme-background,transparent)]
-      text-[var(--theme-text,inherit)]
-      cursor-pointer
-      transition-[background-color,opacity] duration-150 ease-in-out
-      hover:bg-[var(--theme-border,#9d3723)] hover:text-[var(--theme-primary,#fff)]
-      focus-visible:outline focus-visible:outline-2
-      focus-visible:outline-[var(--theme-accent,#2e3526)] focus-visible:outline-offset-2
-      disabled:opacity-30 disabled:cursor-default
-      disabled:hover:bg-[var(--theme-background,transparent)]
-      disabled:hover:text-[var(--theme-text,inherit)];
-  }
-</style> -->
 
 <script define:vars={{ id }}>
   const root = document.getElementById(id);
