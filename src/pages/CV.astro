@@ -5,7 +5,7 @@ import { Image } from 'astro:assets';
 import TableContent from '../components/TableContent.astro';
 import CV_image from '../content/cv/cv-image.jpg';
 
-import pdfIcon from '../assets/pdf.svg'; 
+import pdfIcon from '../assets/pdf.svg';
 import { CV_PDF_PATH } from '../consts';
 // import { site } from '../config/site';
 import Page from '../layouts/BlogPost.astro';
@@ -226,8 +226,8 @@ if (format === 'rendercv' && rc) {
 
       <!-- Floating button: placed here, outside the wrapper -->
       <a
-        
-        href="/{CV_PDF_PATH}"
+        role="button"
+        href={CV_PDF_PATH}
         target="_blank"
         rel="noopener noreferrer"
         class="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 px-4 py-3 rounded-full shadow-lg transition-shadow ease-in-out hover:ring-2 hover:ring-(--color-border)" 
