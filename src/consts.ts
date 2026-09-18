@@ -7,7 +7,7 @@ export const SITE_DESCRIPTION = 'Welcome to my personal and professional website
 
 export const NAV_LINKS = [
   // { title: 'Home', href: '/' },
-  { title: 'About', href: '/about' },
+  // { title: 'About', href: '/about' },
   { title: 'Blog', href: '/blog' },
   { title: 'Projects', href: '/projects' },
   { title: 'CV', href: '/CV' },

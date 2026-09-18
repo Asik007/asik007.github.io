@@ -7,22 +7,24 @@ import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 
 const raw_projects = await getCollection('projects');
-const projects = raw_projects.sort((a, b) => {
+const sorted_projects = raw_projects.sort((a, b) => {
   // Use Unix Epoch (0 / Jan 1 1970) as the ultimate bottom-of-the-list fallback
   const dateA = a.data.pubDate ? a.data.pubDate.valueOf() : 0;
   const dateB = b.data.pubDate ? b.data.pubDate.valueOf() : 0;
 
   return dateB - dateA;
 });
+const projects = sorted_projects.slice(0, 5);
 
 const raw_posts = await getCollection('blog');
-const posts = raw_posts.sort((a, b) => {
+const sorted_posts = raw_posts.sort((a, b) => {
   // Use Unix Epoch (0 / Jan 1 1970) as the ultimate bottom-of-the-list fallback
   const dateA = a.data.pubDate ? a.data.pubDate.valueOf() : 0;
   const dateB = b.data.pubDate ? b.data.pubDate.valueOf() : 0;
 
   return dateB - dateA;
 });
+const posts = sorted_posts.slice(0, 5);
 
 ---
 
