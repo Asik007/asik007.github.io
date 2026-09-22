@@ -5,6 +5,8 @@ import PostCard from '../components/PostCard.astro';
 import { SITE_DESCRIPTION, SITE_TITLE, GITHUB_PROFILE_URL, LINKED_IN_URL } from '../consts';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
+import CV_image from '../content/cv/cv-image.jpg';
+
 
 const raw_projects = await getCollection('projects');
 const sorted_projects = raw_projects.sort((a, b) => {
@@ -39,7 +41,7 @@ const posts = sorted_posts.slice(0, 5);
 			whatever scratches that oh so ellusive itch in my brain.
 		</p>
 		<div class="hero-media">
-			<Image src="/src/content/cv/cv-image.jpg" alt="Advik's profile picture"
+			<Image src={CV_image} alt="Advik's profile picture"
 				width={260} height={260}/>
 			<div class="hero-links">
 				<a href={GITHUB_PROFILE_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
