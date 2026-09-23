@@ -37,10 +37,10 @@ cv:
         end_date: 2024-12
         location: Chicago, IL
         highlights:
-          - Guided 30+ students through lab coursework covering 3D CAD modeling (SolidWorks) and Arduino hardware integration
-          - Held regular office hours to assist students with project execution, circuit troubleshooting, and code debugging
-          - Graded assignments and design documentation, providing targeted technical feedback
-          - Assisted course faculty in developing and testing instructional lab exercises and course materials
+          - Guided 30+ students through hands-on laboratory coursework in 3D CAD modeling (SolidWorks) and Arduino-based hardware integration
+          - Provided technical support during office hours, troubleshooting circuit designs, debugging code, and assisting with project implementation
+          - Evaluated assignments and engineering design documentation, providing targeted feedback to improve technical accuracy and design quality
+          - Collaborated with course faculty to develop, test, and refine instructional laboratory exercises and course materials
 
       - company: Engineering Design Team @ UIC
         position: President & Mechanical/Electrical Lead
@@ -79,17 +79,19 @@ cv:
           - Utilized SOTA ViT-based architecture for droplet segmentation and tracking in microfluidic videos for high-throughput analysis
           - Developed a easy-to-use Python package and front-end GUI for wider adoption
           - Reduced analysis time from hours to minutes for microfluidic experiments, enabling rapid iteration and optimization of device designs
-      - name: Kuriboh Network AV Controller
+      
+      - name: "[Kuriboh Network AV Controller](https://github.com/asik007/kuriboh)"
         date: '2026'
         summary: Network controller for AV hardware featuring a web interface and event hooks.
         highlights:
           - Implemented a state machine and event automation hooks via HTTP and WebSockets for real-time device management
+          - Developed a web-based interface and IoT device integration
 
-      - name: Personal Home Server & Networking
-        date: '2026'
-        summary: Self-hosted local server infrastructure for streaming and automated backups.
-        highlights:
-          - Deployed and maintained containerized services using Docker, local mDNS/ZeroConf, and secure reverse proxy routing
+      # - name: Personal Home Server & Networking
+      #   date: '2026'
+      #   summary: Self-hosted local server infrastructure for streaming and automated backups.
+      #   highlights:
+      #     - Deployed and maintained containerized services using Docker, local mDNS/ZeroConf, and secure reverse proxy routing
 
     publications:
       - title: A systematic investigation of endothelial cell behavior under hydrostatic pressure
@@ -101,6 +103,26 @@ cv:
         journal: Scientific Reports
         date: 2025-10
         doi: 10.1038/s41598-025-16094-2
+
+      - title: Microfluidic Platform for Personalized Immunotherapy Screening with Core-Needle Biopsies
+        authors:
+          - "*Advik Sikligar*"
+          - Yoo, Jeonghun
+          - Lee, Steve
+          - Eddington, David
+        journal: BMES Annual Meeting
+        date: 2025-10
+
+      - title: Microfluidic Platform for Personalized Immunotherapy Screening with Core-Needle Biopsies
+        authors:
+          - "*Advik Sikligar*"
+          - Elie Abi Kalil
+          - Lee, Steve
+          - Eddington, David
+        journal: BMES Annual Meeting
+        date: 2025-4
+
+      
 
     skills:
       - label: Languages
@@ -121,12 +143,6 @@ cv:
         date: 2026-05
         highlights:
           - Conjunctiva Bulbar Handheld Imaging Device (Biomedical Engineering Department)
-      - name: BMES Annual Meeting Presenter
-        date: 2025-10
-        highlights:
-          - Microfluidic Platform for Personalized Immunotherapy Screening with Core-Needle Biopsies
-      - name: Chicago Area Undergraduate Research
-        date: 2025-03
 
     certifications:
       - name: Certified SolidWorks Professional (CSWP)
