@@ -80,12 +80,12 @@ cv:
           - Developed a easy-to-use Python package and front-end GUI for wider adoption
           - Reduced analysis time from hours to minutes for microfluidic experiments, enabling rapid iteration and optimization of device designs
       
-      - name: "[Kuriboh Network AV Controller](https://github.com/asik007/kuriboh)"
-        date: '2026'
-        summary: Network controller for AV hardware featuring a web interface and event hooks.
-        highlights:
-          - Implemented a state machine and event automation hooks via HTTP and WebSockets for real-time device management
-          - Developed a web-based interface and IoT device integration
+      # - name: "[Kuriboh Network AV Controller](https://github.com/asik007/kuriboh)"
+      #   date: '2026'
+      #   summary: Network controller for AV hardware featuring a web interface and event hooks.
+      #   highlights:
+      #     - Implemented a state machine and event automation hooks via HTTP and WebSockets for real-time device management
+      #     - Developed a web-based interface and IoT device integration
 
       # - name: Personal Home Server & Networking
       #   date: '2026'
@@ -132,7 +132,7 @@ cv:
       - label: CAD & Simulation
         details: SolidWorks (CSWP), Inventor, Fusion 360, AutoCAD, Simulink, LTspice
       - label: Embedded & Hardware
-        details: VHDL, FPGA (Vivado, ISE), KiCad, Altium, Arduino, Microcontrollers
+        details: KiCad, Altium, Arduino, Microcontrollers, VHDL, FPGA (Vivado, ISE)
       - label: Microfabrication & Wet Lab
         details: Soft Lithography, Photolithography, Cell Culture, Confocal Microscopy, Microfluidics, Staining, PCR, ELISA, Nanodrop
       - label: Prototyping & DevOps
