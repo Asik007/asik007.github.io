@@ -45,7 +45,8 @@ const SectionEntrySchema = z.union([
 ]);
 
 // The 'cv' object – we validate the core fields, but sections are flexible.
-const CvSchema = z.object({
+const CvSchema = 
+z.object({
   name: z.string(),
   headline: z.string().optional(),
   location: z.string().optional(),
@@ -68,7 +69,7 @@ const CvSchema = z.object({
 // Root schema – matches the YAML exactly
 const FullRenderCVSchema = z.object({
   cv: CvSchema,
-  design: z.any().optional(),          // complex; keep flexible
+  // design: z.any().optional(),          // complex; keep flexible
   locale: z.any().optional(),
   settings: z.any().optional(),
 });
