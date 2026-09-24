@@ -23,7 +23,7 @@ const cvEntry = cvEntries[0]; // Get the first (and only) entry
 // const format = site.cv.format;
 const format = 'rendercv'; // or 'jsonresume' depending on your data
 
-const rc = cvEntry.data ?? null;
+const rc = cvEntry.data.cv ?? null;
 const education = rc?.sections?.education ?? [];
 const experience = rc?.sections?.experience ?? [];
 const rcPublications = rc?.sections?.publications ?? [];
@@ -31,7 +31,7 @@ const awards = rc?.sections?.awards ?? [];
 const skills = rc?.sections?.skills ?? []
 const interests = rc?.sections?.interests ?? [];
 
-// console.log('CV Entry:', rc);
+console.log('CV Entry:', rc);
 // console.log('Education:', education);
 // console.log('Experience:', experience);
 // console.log('Publications:', rcPublications);
