@@ -76,7 +76,7 @@ jobs:
         run: |
           for file in ${{ env.CV_PATH }}/*cv.yml; do
             # get file basename
-            filename=$(basename "$file" .pdf)
+            filename=$(basename "$file" .yml)
             # Render CV directly into the output directory
             rendercv render $file --pdf-path ../../../public/cv-pdfs/$filename.pdf -nomd -nohtml -nopng
           done
