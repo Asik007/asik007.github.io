@@ -25,10 +25,10 @@ cv:
         end_date: present
         location: Chicago, IL
         highlights:
-          - Generated and compiled pilot experimental data that supported a successful NIH R21 grant application for a translational medical device
-          - Developed custom software scripts and hardware setups to streamline prototyping and testing workflows for microfluidic devices
-          - Executed wet lab techniques, microfluidic device fabrication, cell culture protocols, and optical/confocal microscopy
-          - Conducted routine maintenance and calibration on daily-use R&D equipment to prevent laboratory downtime
+          - Generated pilot data that garnered a NIH R21 grant
+          - Developed software and hardware to streamline workflows for microfluidic devices
+          - Executed device fabrication, cell culture protocols, and optical/confocal microscopy
+          - Conducted maintenance and calibration of SLA, FDM, and microfabrication equipment
           - Delivered weekly progress updates and data summaries during lab team meetings
 
       - company: UIC Department of BME
@@ -37,21 +37,21 @@ cv:
         end_date: 2024-12
         location: Chicago, IL
         highlights:
-          - Guided 30+ students through hands-on laboratory coursework in 3D CAD modeling (SolidWorks) and Arduino-based hardware integration
-          - Provided technical support during office hours, troubleshooting circuit designs, debugging code, and assisting with project implementation
-          - Evaluated assignments and engineering design documentation, providing targeted feedback to improve technical accuracy and design quality
-          - Collaborated with course faculty to develop, test, and refine instructional laboratory exercises and course materials
+          - Guided 30+ students through hands-on coursework in CAD(SolidWorks), electrical design, and embedded systems (Arduino)
+          - Provided technical support during office hours, troubleshooting circuits, and debugging code
+          - Evaluated assignments providing targeted feedback to improve clarity and design quality
+          - Collaborated with course faculty to develop and refine exercises and course materials
 
       - company: Engineering Design Team @ UIC
-        position: President & Mechanical/Electrical Lead
+        position: President
         start_date: 2022-08
         end_date: 2025-04
         location: Chicago, IL
         highlights:
-          - Served as Mechanical and Electrical Lead for the SUAS team, assisting in the design, CAD modeling, simulation, and bench testing of UAV components
-          - Managed organizational administration as President, acting as the primary liaison between the team and university administration
-          - Administered and balanced budgets across 4 technical sub-teams while assisting with corporate sponsorship outreach and fundraising
-          - Coordinated team logistics, organized meetings, and facilitated onboarding for new members
+          - Mechanical and Electrical Lead for the UAV team leading the design, CAD, simulation, and testing
+          - Acted as a liaison between the team and university administration
+          - Balanced budget across 4 sub-teams while assisting with sponsorships, and outreach
+          - Coordinated logistics, meetings, and onboarding for new members
 
       - company: Engineering World Health
         position: Treasurer
@@ -59,9 +59,9 @@ cv:
         end_date: 2025-04
         location: Chicago, IL
         highlights:
-          - Managed organizational financial records, budget tracking, and reporting for projects and events
-          - Assisted in the assembly and testing of medical simulation devices designed for low-resource healthcare settings
-          - Communicated regularly with faculty advisors to coordinate operational planning and future design goals
+          - Managed financial records, budget tracking, and reporting for projects and events
+          - Assisted in assembly and testing of medical simulation device
+          - Communicated regularly with faculty advisor to coordinate plans and future steps
 
     projects:
       - name: "[Cat's Eye](https://github.com/asik007/cats-eye-python)"
@@ -69,16 +69,16 @@ cv:
         end_date: 2026-05
         summary: Capstone project developing a portable bulbar conjunctiva imaging platform and computer vision tool for microvascular isolation and analysis.
         highlights:
-          - Built automated Python computer vision workflows for vessel segmentation and morphological extraction
+          - Built automated Python computer vision pipeline for vessel segmentation and morphological analysis
           - Awarded Best in Show (Biomedical Engineering Division) at UIC Engineering Expo 2026
 
       - name: "[Tapioca](https://github.com/asik007/tapioca)"
         date: '2023'
         summary: Automated droplet segmentation via visual transformer
         highlights:
-          - Utilized SOTA ViT-based architecture for droplet segmentation and tracking in microfluidic videos for high-throughput analysis
-          - Developed a easy-to-use Python package and front-end GUI for wider adoption
-          - Reduced analysis time from hours to minutes for microfluidic experiments, enabling rapid iteration and optimization of device designs
+          - Utilized SOTA ViT-based architecture for droplet segmentation and tracking
+          - Developed a easy-to-use Python package and front-end GUI
+          - Reduced analysis time from hours to minutes for rapid iteration and optimization
       
       # - name: "[Kuriboh Network AV Controller](https://github.com/asik007/kuriboh)"
       #   date: '2026'
