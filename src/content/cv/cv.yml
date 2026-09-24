@@ -147,3 +147,6 @@ cv:
     certifications:
       - name: Certified SolidWorks Professional (CSWP)
         date: 2025-06
+
+design:
+  theme: engineeringresumes
