@@ -113,14 +113,14 @@ cv:
         journal: BMES Annual Meeting
         date: 2025-10
 
-      - title: Microfluidic Platform for Personalized Immunotherapy Screening with Core-Needle Biopsies
-        authors:
-          - "*Advik Sikligar*"
-          - Elie Abi Kalil
-          - Lee, Steve
-          - Eddington, David
-        journal: Chicago Area Undergraduate Research Symposium
-        date: 2025-04
+      # - title: Microfluidic Platform for Personalized Immunotherapy Screening with Core-Needle Biopsies
+      #   authors:
+      #     - "*Advik Sikligar*"
+      #     - Elie Abi Kalil
+      #     - Lee, Steve
+      #     - Eddington, David
+      #   journal: Chicago Area Undergraduate Research Symposium
+      #   date: 2025-04
 
       
 
@@ -144,9 +144,9 @@ cv:
         highlights:
           - Conjunctiva Bulbar Handheld Imaging Device (Biomedical Engineering Department)
 
-    certifications:
-      - name: Certified SolidWorks Professional (CSWP)
-        date: 2025-06
+    # certifications:
+    #   - name: Certified SolidWorks Professional (CSWP)
+    #     date: 2025-06
 
 
 design:
