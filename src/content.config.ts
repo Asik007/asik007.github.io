@@ -77,8 +77,10 @@ const FullRenderCVSchema = z.object({
 // ------------------- Collection Definition -------------------
 
 const cv = defineCollection({
-  loader: file("src/content/cv/cv.yml"),
-  schema: FullRenderCVSchema.shape.cv, // merges { cv: { ... } } into this object
+  loader: glob({ pattern: 'cv.yml', base: './src/content/cv' }),
+  schema: z.object({
+    cv: CvSchema,
+  }),
 });
 
 
