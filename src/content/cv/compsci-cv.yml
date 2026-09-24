@@ -1,7 +1,7 @@
 cv:
   name: Advik Sikligar
   # headline: Biomedical Engineering Student | Microfluidics, Computer Vision & Embedded Systems
-  location: Chicago, IL
+  # location: Chicago, IL
   email: adviksikligar@gmail.com
   website: http://asik007.github.io
   social_networks:
@@ -25,22 +25,22 @@ cv:
         end_date: present
         location: Chicago, IL
         highlights:
-          - Generated pilot data that garnered a NIH R21 grant
+          # - Generated pilot data that garnered a NIH R21 grant
           - Developed software and hardware to streamline workflows for microfluidic devices
-          - Executed device fabrication, cell culture protocols, and optical/confocal microscopy
+          # - Executed device fabrication, cell culture protocols, and optical/confocal microscopy
           - Conducted maintenance and calibration of SLA, FDM, and microfabrication equipment
           - Delivered weekly progress updates and data summaries during lab team meetings
 
-      - company: UIC Department of BME
-        position: Teaching Assistant
-        start_date: 2024-08
-        end_date: 2024-12
-        location: Chicago, IL
-        highlights:
-          - Guided 30+ students through hands-on coursework in CAD(SolidWorks), electrical design, and embedded systems (Arduino)
-          - Provided technical support during office hours, troubleshooting circuits, and debugging code
-          - Evaluated assignments providing targeted feedback to improve clarity and design quality
-          - Collaborated with course faculty to develop and refine exercises and course materials
+      # - company: UIC Department of BME
+      #   position: Teaching Assistant
+      #   start_date: 2024-08
+      #   end_date: 2024-12
+      #   location: Chicago, IL
+      #   highlights:
+      #     - Guided 30+ students through hands-on coursework in Arduino and other engineering topics
+      #     - Provided technical support during office hours, troubleshooting circuits, and debugging code
+      #     - Evaluated assignments providing targeted feedback to improve clarity and design quality
+      #     # - Collaborated with course faculty to develop and refine exercises and course materials
 
       - company: Engineering Design Team @ UIC
         position: President
@@ -87,11 +87,11 @@ cv:
       #     - Implemented a state machine and event automation hooks via HTTP and WebSockets for real-time device management
       #     - Developed a web-based interface and IoT device integration
 
-      - name: Personal Home Server & Networking
-        date: '2026'
-        summary: Self-hosted local server infrastructure for streaming and automated backups.
-        highlights:
-          - Deployed and maintained containerized services using Docker, local mDNS/ZeroConf, and secure reverse proxy routing
+      # - name: Personal Home Server & Networking
+      #   date: '2026'
+      #   summary: Self-hosted local server infrastructure for streaming and automated backups.
+      #   highlights:
+      #     - Deployed and maintained containerized services using Docker, local mDNS/ZeroConf, and secure reverse proxy routing
 
     publications:
       - title: A systematic investigation of endothelial cell behavior under hydrostatic pressure
@@ -113,14 +113,14 @@ cv:
         journal: BMES Annual Meeting
         date: 2025-10
 
-      - title: Microfluidic Platform for Personalized Immunotherapy Screening with Core-Needle Biopsies
-        authors:
-          - "*Advik Sikligar*"
-          - Elie Abi Kalil
-          - Lee, Steve
-          - Eddington, David
-        journal: Chicago Area Undergraduate Research Symposium
-        date: 2025-04
+      # - title: Microfluidic Platform for Personalized Immunotherapy Screening with Core-Needle Biopsies
+      #   authors:
+      #     - "*Advik Sikligar*"
+      #     - Elie Abi Kalil
+      #     - Lee, Steve
+      #     - Eddington, David
+      #   journal: Chicago Area Undergraduate Research Symposium
+      #   date: 2025-04
 
       
 
@@ -129,14 +129,14 @@ cv:
         details: Python, C++, VHDL, MATLAB, SQL, Bash/Shell
       - label: ML & Computer Vision
         details: PyTorch, OpenCV, ONNX, NumPy, Pandas, Scikit-learn, CUDA
-      - label: CAD & Simulation
-        details: SolidWorks (CSWP), Inventor, Fusion 360, AutoCAD, Simulink, LTspice
+      # - label: CAD & Simulation
+      #   details: SolidWorks (CSWP), Inventor, Fusion 360, AutoCAD, Simulink, LTspice
       - label: Embedded & Hardware
-        details: KiCad, Altium, Arduino, Microcontrollers, VHDL, FPGA (Vivado, ISE)
-      - label: Microfabrication & Wet Lab
-        details: Soft Lithography, Photolithography, Cell Culture, Confocal Microscopy, Microfluidics, Staining, PCR, ELISA, Nanodrop
-      - label: Prototyping & DevOps
-        details: 3D Printing (FDM/SLA), Milling/Turning, Laser Cutting, Linux, Docker, Git, CI/CD, LaTeX
+        details: Arduino, Microcontrollers, VHDL, FPGA (Vivado, ISE)
+      # - label: Microfabrication & Wet Lab
+      #   details: Soft Lithography, Photolithography, Cell Culture, Confocal Microscopy, Microfluidics, Staining, PCR, ELISA, Nanodrop
+      - label: Prototyping
+        details: Linux, Docker, Git, CI/CD
 
     awards:
       - name: UIC Engineering Expo - Best in Show
@@ -144,9 +144,9 @@ cv:
         highlights:
           - Conjunctiva Bulbar Handheld Imaging Device (Biomedical Engineering Department)
 
-    certifications:
-      - name: Certified SolidWorks Professional (CSWP)
-        date: 2025-06
+    # certifications:
+    #   - name: Certified SolidWorks Professional (CSWP)
+    #     date: 2025-06
 
 design:
-  theme: engineeringclassic
+  theme: mytheme
