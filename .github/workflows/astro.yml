@@ -75,7 +75,7 @@ jobs:
       - name: Render CV to PDF & Prepare Pages Directory
         run: |
           # Render CV directly into the output directory
-          rendercv render ${{ env.CV_PATH }} --pdf-path ../../../public/cv.pdf -nomd -nohtml -nopng --design.theme engineeringresumes
+          rendercv render ${{ env.CV_PATH }} --pdf-path ../../../public/cv.pdf -nomd -nohtml -nopng
 
       - name: Setup Pages
         id: pages
