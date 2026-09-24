@@ -26,7 +26,7 @@ concurrency:
 
 env:
   BUILD_PATH: "." # default value when not using subfolders
-  CV_PATH: "./src/content/cv/cv.yml"
+  CV_PATH: "./src/content/cv/"
   # BUILD_PATH: subfolder
 
 jobs:
@@ -74,8 +74,10 @@ jobs:
 
       - name: Render CV to PDF & Prepare Pages Directory
         run: |
-          # Render CV directly into the output directory
-          rendercv render ${{ env.CV_PATH }} --pdf-path ../../../public/cv-pdfs/cv.pdf -nomd -nohtml -nopng
+          for file in ${{ env.CV_PATH }}/*cv.yml; do
+            # Render CV directly into the output directory
+            rendercv render $file --pdf-path ../../../public/cv-pdfs/ -nomd -nohtml -nopng
+          done
 
       - name: Setup Pages
         id: pages
