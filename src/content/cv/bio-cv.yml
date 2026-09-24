@@ -134,7 +134,7 @@ cv:
       # - label: Embedded & Hardware
       #   details: KiCad, Altium, Arduino, Microcontrollers, VHDL, FPGA (Vivado, ISE)
       - label: Wet Lab
-        details: Soft Lithography, Photolithography, Cell Culture, Confocal Microscopy, Microfluidics, Staining, PCR, ELISA, Nanodrop
+        details: Lithography, Cell Culture, Confocal Microscopy, Staining, PCR, ELISA, Nanodrop
       # - label: Prototyping & DevOps
       #   details: 3D Printing (FDM/SLA), Milling/Turning, Laser Cutting, Linux, Docker, Git, CI/CD, LaTeX
 
