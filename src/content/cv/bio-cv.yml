@@ -1,0 +1,203 @@
+cv:
+  name: Advik Sikligar
+  # headline: Biomedical Engineering Student | Microfluidics, Computer Vision & Embedded Systems
+  location: Chicago, IL
+  email: adviksikligar@gmail.com
+  website: http://asik007.github.io
+  social_networks:
+    - network: LinkedIn
+      username: advik-sikligar
+    - network: GitHub
+      username: asik007
+  sections:
+    education:
+      - institution: University of Illinois Chicago
+        area: Biomedical Engineering
+        degree: B.Sc.
+        start_date: 2022-09
+        end_date: 2026-12
+        location: Chicago, IL
+
+    experience:
+      - company: Biological Microsystems Lab
+        position: BioMicrofluidics Research Assistant
+        start_date: 2023-04
+        end_date: present
+        location: Chicago, IL
+        highlights:
+          - Generated pilot data that garnered a NIH R21 grant
+          - Developed software and hardware to streamline workflows for microfluidic devices
+          - Executed device fabrication, cell culture protocols, and optical/confocal microscopy
+          # - Conducted maintenance and calibration of SLA, FDM, and microfabrication equipment
+          - Delivered weekly progress updates and data summaries during lab team meetings
+
+      - company: UIC Department of BME
+        position: Teaching Assistant
+        start_date: 2024-08
+        end_date: 2024-12
+        location: Chicago, IL
+        highlights:
+          - Guided 30+ students through hands-on coursework in CAD(SolidWorks), electrical design, and embedded systems (Arduino)
+          # - Provided technical support during office hours, troubleshooting circuits, and debugging code
+          - Evaluated assignments providing targeted feedback to improve clarity and design quality
+          - Collaborated with course faculty to develop and refine exercises and course materials
+
+      - company: Engineering Design Team @ UIC
+        position: President
+        start_date: 2022-08
+        end_date: 2025-04
+        location: Chicago, IL
+        highlights:
+          # - Mechanical and Electrical Lead for the UAV team leading the design, CAD, simulation, and testing
+          - Acted as a liaison between the team and university administration
+          - Balanced budget across 4 sub-teams while assisting with sponsorships, and outreach
+          - Coordinated logistics, meetings, and onboarding for new members
+
+      - company: Engineering World Health
+        position: Treasurer
+        start_date: 2023-08
+        end_date: 2025-04
+        location: Chicago, IL
+        highlights:
+          - Managed financial records, budget tracking, and reporting for projects and events
+          - Assisted in assembly and testing of medical simulation device
+          - Communicated regularly with faculty advisor to coordinate plans and future steps
+
+    projects:
+      - name: "[Cat's Eye](https://github.com/asik007/cats-eye-python)"
+        start_date: 2025-07
+        end_date: 2026-05
+        summary: Capstone project developing a portable bulbar conjunctiva imaging platform and computer vision tool for microvascular isolation and analysis.
+        highlights:
+          - Built automated Python computer vision pipeline for vessel segmentation and morphological analysis
+          - Awarded Best in Show (Biomedical Engineering Division) at UIC Engineering Expo 2026
+
+      - name: "[Tapioca](https://github.com/asik007/tapioca)"
+        date: '2023'
+        summary: Automated droplet segmentation via visual transformer
+        highlights:
+          - Utilized SOTA ViT-based architecture for droplet segmentation and tracking
+          - Developed a easy-to-use Python package and front-end GUI
+          - Reduced analysis time from hours to minutes for rapid iteration and optimization
+      
+      # - name: "[Kuriboh Network AV Controller](https://github.com/asik007/kuriboh)"
+      #   date: '2026'
+      #   summary: Network controller for AV hardware featuring a web interface and event hooks.
+      #   highlights:
+      #     - Implemented a state machine and event automation hooks via HTTP and WebSockets for real-time device management
+      #     - Developed a web-based interface and IoT device integration
+
+      # - name: Personal Home Server & Networking
+      #   date: '2026'
+      #   summary: Self-hosted local server infrastructure for streaming and automated backups.
+      #   highlights:
+      #     - Deployed and maintained containerized services using Docker, local mDNS/ZeroConf, and secure reverse proxy routing
+
+    publications:
+      - title: A systematic investigation of endothelial cell behavior under hydrostatic pressure
+        authors:
+          - Giulia Venturini
+          - "*Advik Sikligar*"
+          - Giulia De Campo
+          - David T Eddington
+        journal: Scientific Reports
+        date: 2025-10
+        doi: 10.1038/s41598-025-16094-2
+
+      - title: Microfluidic Platform for Personalized Immunotherapy Screening with Core-Needle Biopsies
+        authors:
+          - "*Advik Sikligar*"
+          - Yoo, Jeonghun
+          - Lee, Steve
+          - Eddington, David
+        journal: BMES Annual Meeting
+        date: 2025-10
+
+      - title: Microfluidic Platform for Personalized Immunotherapy Screening with Core-Needle Biopsies
+        authors:
+          - "*Advik Sikligar*"
+          - Elie Abi Kalil
+          - Lee, Steve
+          - Eddington, David
+        journal: Chicago Area Undergraduate Research Symposium
+        date: 2025-04
+
+      
+
+    skills:
+      - label: Languages
+        details: Python, C++, VHDL, MATLAB, SQL, Bash/Shell
+      # - label: ML & Computer Vision
+      #   details: PyTorch, OpenCV, ONNX, NumPy, Pandas, Scikit-learn, CUDA
+      # - label: CAD & Simulation
+      #   details: SolidWorks (CSWP), Inventor, Fusion 360, AutoCAD, Simulink, LTspice
+      # - label: Embedded & Hardware
+      #   details: KiCad, Altium, Arduino, Microcontrollers, VHDL, FPGA (Vivado, ISE)
+      - label: Wet Lab
+        details: Soft Lithography, Photolithography, Cell Culture, Confocal Microscopy, Microfluidics, Staining, PCR, ELISA, Nanodrop
+      # - label: Prototyping & DevOps
+      #   details: 3D Printing (FDM/SLA), Milling/Turning, Laser Cutting, Linux, Docker, Git, CI/CD, LaTeX
+
+    awards:
+      - name: UIC Engineering Expo - Best in Show
+        date: 2026-05
+        highlights:
+          - Conjunctiva Bulbar Handheld Imaging Device (Biomedical Engineering Department)
+
+    certifications:
+      - name: Certified SolidWorks Professional (CSWP)
+        date: 2025-06
+
+
+design:
+  theme: harvard
+  page:
+    top_margin: 0.5in
+    bottom_margin: 0.5in
+    left_margin: 0.5in
+    right_margin: 0.5in
+    show_top_note: false
+  colors:
+    name: rgb(0,0,0)
+    headline: rgb(0,0,0)
+    connections: rgb(0,0,0)
+    section_titles: rgb(0,0,0)
+    links: rgb(0,0,0)
+  typography:
+    font_family:
+      body: XCharter
+      name: XCharter
+      headline: XCharter
+      connections: XCharter
+      section_titles: XCharter
+    font_size:
+      name: 25pt
+      connections: 9pt
+      section_titles: 1.3em
+  header:
+    space_below_name: 0.5cm
+    space_below_headline: 0.5cm
+    space_below_connections: 0.5cm
+    connections:
+      show_icons: false
+      separator: "•"
+      space_between_connections: 0.4cm
+  section_titles:
+    type: with_partial_line
+    space_below: 0.2cm
+  sections:
+    space_between_regular_entries: 1em
+    show_time_spans_in: []
+  entries:
+    short_second_row: false
+  templates:
+    time_span: ''
+    education_entry:
+      main_column: "**INSTITUTION**, DEGREE_WITH_AREA -- LOCATION\nSUMMARY\nHIGHLIGHTS"
+      date_and_location_column: DATE
+    normal_entry:
+      main_column: "**NAME** -- **LOCATION**\nSUMMARY\nHIGHLIGHTS"
+      date_and_location_column: DATE
+    experience_entry:
+      main_column: "**COMPANY**, POSITION \nSUMMARY\nHIGHLIGHTS"
+      date_and_location_column: DATE

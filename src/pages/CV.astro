@@ -22,7 +22,7 @@ const cvEntry = cvEntries[0]; // Get the first (and only) entry
 
 // const format = site.cv.format;
 const format = 'rendercv'; // or 'jsonresume' depending on your data
-console.log('CV Format:', cvEntry.data);
+// console.log('CV Format:', cvEntry.data);
 
 const rc = cvEntry.data.cv ?? null;
 const education = rc?.sections?.education ?? [];
@@ -39,6 +39,7 @@ const interests = rc?.sections?.interests ?? [];
 // console.log('Awards:', awards);
 // console.log('Skills:', skills);
 // console.log('Interests:', interests);
+console.log('CV PDF Path:', CV_PDF_PATH);
 
 // Build sidebar TOC items based on which sections have data
 type TocItem = {depth: number; label: string; href: string };
