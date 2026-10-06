@@ -64,11 +64,12 @@ cv:
           - Communicated regularly with faculty advisor to coordinate plans and future steps
 
     projects:
-      - name: "[Automated Sclera Vessel Segmentation and Analysis - Cat's Eye](https://github.com/asik007/cats-eye-python)"
+      - name: "[Automated Bulbar Conjunctiva Imaging Device, Segmentation and Analysis - Cat's Eye](https://github.com/asik007/cats-eye-python)"
         start_date: 2025-07
         end_date: 2026-05
         summary: Capstone project developing a portable bulbar conjunctiva imaging platform and computer vision tool for microvascular isolation and analysis.
         highlights:
+          - Created a portable imaging device for the bulbar conjunctiva using the engineering design process
           - Built automated Python computer vision pipeline for vessel segmentation and morphological analysis
           - Awarded Best in Show (Biomedical Engineering Division) at UIC Engineering Expo 2026
 
@@ -131,6 +132,8 @@ cv:
         details: PyTorch, OpenCV, ONNX, NumPy, Pandas, Scikit-learn, CUDA
       - label: CAD & Simulation
         details: SolidWorks (CSWP), Inventor, Fusion 360, AutoCAD, Simulink, LTspice
+      - label: Design
+        details: Microfabrication, Mold & Co-Molding, Additive & Subtractive Manufacturing
       - label: Embedded & Hardware
         details: KiCad, Altium, Arduino, Microcontrollers, VHDL, FPGA (Vivado, ISE)
       - label: Microfabrication & Wet Lab
