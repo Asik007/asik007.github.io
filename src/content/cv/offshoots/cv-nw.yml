@@ -1,9 +1,9 @@
 cv:
   name: Advik Sikligar
   # headline: Biomedical Engineering Student | Microfluidics, Computer Vision & Embedded Systems
-  # location: Chicago, IL
+  location: Chicago, IL
   email: adviksikligar@gmail.com
-  # website: http://asik007.github.io
+  website: http://asik007.github.io
   social_networks:
     - network: LinkedIn
       username: advik-sikligar
@@ -22,7 +22,7 @@ cv:
       - company: Biological Microsystems Lab
         position: BioMicrofluidics Research Assistant
         start_date: 2023-04
-        end_date: Present
+        end_date: present
         location: Chicago, IL
         highlights:
           - Generated pilot data that garnered a NIH R21 grant
@@ -37,12 +37,12 @@ cv:
         end_date: 2024-12
         location: Chicago, IL
         highlights:
-          - Guided 30+ students through hands-on coursework in CAD(SolidWorks), electrical design, and embedded systems (Arduino)
+          - Guided 30+ students through hands-on coursework in SolidWorks and Arduino
           - Provided technical support during office hours, troubleshooting circuits, and debugging code
-          - Evaluated assignments providing targeted feedback to improve clarity and design quality
-          - Collaborated with course faculty to develop and refine exercises and course materials
+          # - Evaluated assignments providing targeted feedback to improve clarity and design quality
+          # - Collaborated with course faculty to develop and refine exercises and course materials
 
-      - company: Engineering Design Team - UIC
+      - company: Engineering Design Team @ UIC
         position: President
         start_date: 2022-08
         end_date: 2025-04
@@ -64,7 +64,7 @@ cv:
           - Communicated regularly with faculty advisor to coordinate plans and future steps
 
     projects:
-      - name: "[Automated Sclera Vessel Segmentation and Analysis - Cat's Eye](https://github.com/asik007/cats-eye-python)"
+      - name: "[Cat's Eye](https://github.com/asik007/cats-eye-python)"
         start_date: 2025-07
         end_date: 2026-05
         summary: Capstone project developing a portable bulbar conjunctiva imaging platform and computer vision tool for microvascular isolation and analysis.
@@ -72,28 +72,14 @@ cv:
           - Built automated Python computer vision pipeline for vessel segmentation and morphological analysis
           - Awarded Best in Show (Biomedical Engineering Division) at UIC Engineering Expo 2026
 
-      - name: "[Automated Microdroplet Analysis - Tapioca](https://github.com/asik007/tapioca)"
-        date: '2023'
+      - name: "[Tapioca](https://github.com/asik007/tapioca)"
+        date: 2023-05
         summary: Automated droplet segmentation via visual transformer
         highlights:
           - Utilized SOTA ViT-based architecture for droplet segmentation and tracking
           - Developed a easy-to-use Python package and front-end GUI
           - Reduced analysis time from hours to minutes for rapid iteration and optimization
-      
-      # - name: "[Kuriboh Network AV Controller](https://github.com/asik007/kuriboh)"
-      #   date: '2026'
-      #   summary: Network controller for AV hardware featuring a web interface and event hooks.
-      #   highlights:
-      #     - Implemented a state machine and event automation hooks via HTTP and WebSockets for real-time device management
-      #     - Developed a web-based interface and IoT device integration
-
-      # - name: Personal Home Server & Networking
-      #   date: '2026'
-      #   summary: Self-hosted local server infrastructure for streaming and automated backups.
-      #   highlights:
-      #     - Deployed and maintained containerized services using Docker, local mDNS/ZeroConf, and secure reverse proxy routing
-
-    publications:
+    Publications & Presentations:
       - title: A systematic investigation of endothelial cell behavior under hydrostatic pressure
         authors:
           - Giulia Venturini
@@ -123,22 +109,19 @@ cv:
         date: 2025-04
 
 
-
     skills:
       - label: Languages
-        details: Python, C++, VHDL, MATLAB, SQL, Bash/Shell
+        details: Python, C++, MATLAB
       - label: ML & Computer Vision
-        details: PyTorch, OpenCV, ONNX, NumPy, Pandas, Scikit-learn, CUDA
+        details: PyTorch, OpenCV, ONNX, NumPy, Pandas, Scikit-learn
       - label: CAD & Simulation
-        details: SolidWorks (CSWP), Inventor, Fusion 360, AutoCAD, Simulink, LTspice
+        details: SolidWorks (CSWP), Inventor, Fusion 360, AutoCAD, Simulink
       - label: Embedded & Hardware
-        details: KiCad, Altium, Arduino, Microcontrollers, VHDL, FPGA (Vivado, ISE)
+        details: KiCad, Altium, Arduino, VHDL, FPGA (Vivado, ISE)
       - label: Microfabrication & Wet Lab
-        details: Soft Lithography, Photolithography, Confocal Microscopy, Microfluidics
-      - label: Biological
-        details: BSL1, Adherent Mammalian Cell Culture (HUVEC & CHO), HUVEC Spheroid Culture, Staining (Trypan, Hoechest, Phalloidin), PCR, ELISA, Nanodrop
+        details: Photolithography, Cell Culture, Confocal Microscopy, Staining
       - label: Prototyping & DevOps
-        details: 3D Printing (FDM/SLA), Milling/Turning, Laser Cutting, Linux, Docker, Git, CI/CD, LaTeX
+        details: 3D Printing (FDM/SLA), Milling/Turning, Laser Cutting, Linux, Docker, Git
 
     awards:
       - name: UIC Engineering Expo - Best in Show
@@ -192,6 +175,9 @@ design:
     show_time_spans_in: []
   entries:
     short_second_row: false
+    side_space: 0.1cm
+    space_between_columns: 0.1cm
+
   templates:
     time_span: ''
     education_entry:
