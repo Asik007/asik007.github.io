@@ -80,7 +80,7 @@ cv:
           - Utilized SOTA ViT-based architecture for droplet segmentation and tracking
           - Developed a easy-to-use Python package and front-end GUI
           - Reduced analysis time from hours to minutes for rapid iteration and optimization
-      
+
       # - name: "[Kuriboh Network AV Controller](https://github.com/asik007/kuriboh)"
       #   date: '2026'
       #   summary: Network controller for AV hardware featuring a web interface and event hooks.
