@@ -22,7 +22,7 @@ cv:
       - company: Biological Microsystems Lab
         position: BioMicrofluidics Research Assistant
         start_date: 2023-04
-        end_date: Present
+        end_date: present
         location: Chicago, IL
         highlights:
           - Generated pilot data that garnered a NIH R21 grant
